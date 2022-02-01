@@ -1,0 +1,25 @@
+@import '../Common/styles.scss';
+
+.presets {
+    display: flex;
+
+    &_item {
+        border: 1px solid $blue2;
+        border-radius: 4px;
+        padding: 5px 12px;
+        box-sizing: border-box;
+        text-transform: capitalize;
+        height: 32px;
+
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+
+        &.selected, &:hover, &:focus {
+            background-color: $blue;
+            color: $white;
+            transition: .2s;
+            cursor: pointer;
+        }   
+    }
+}

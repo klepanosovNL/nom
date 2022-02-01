@@ -1,0 +1,37 @@
+@import '../Common/styles.scss';
+
+.search {
+    display: flex;
+    height: 32px;
+    align-items: center;
+    max-width: 190px;
+    border-radius: 4px;
+    border: 1px solid $grey2;
+    padding-right: 8px;
+    box-sizing: border-box;
+
+    i {
+        color: $grey2;
+        margin: 0 8px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        padding: 0;
+        width: 100%;
+
+        &:focus, &:active {
+            border: none;
+            outline: none;
+        }
+
+        &::placeholder {
+            color: $grey2;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 12px;  
+        }
+    }
+}
+
