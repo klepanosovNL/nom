@@ -23,12 +23,13 @@ export const ItemList = () => {
 	return (
 		<div className='items'>
 			<div className='items_container'>
-				{getFilteredArray().map(({ name, description, allowed }) => (
+				{getFilteredArray().map(({ name, description, allowed, blocked }) => (
 					<Item
 						key={name}
 						name={name}
 						description={description}
 						allowed={allowed}
+						blocked={blocked}
 					/>
 				))}
 			</div>

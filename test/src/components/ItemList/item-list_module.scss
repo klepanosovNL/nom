@@ -26,10 +26,6 @@
         max-width: 168px;
         position: relative;
 
-        &:not(:last-child) {
-            margin-bottom: 24px;
-        }
-
         &-container {
             margin-left: auto;
             transition: .3s;

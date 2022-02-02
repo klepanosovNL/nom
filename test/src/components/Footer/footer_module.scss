@@ -29,6 +29,11 @@
             height: fit-content;
             cursor: pointer;
 
+            span {
+                margin-right: 4px;
+                font-weight: bold;
+            }
+
             &:not(:last-child) {
                 margin-right: 8px;
             }

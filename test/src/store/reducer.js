@@ -16,6 +16,7 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_LIST:
+		case SET_CATEGORY_STATUS:
 			return {
 				...state,
 				list: [...action.list],
@@ -38,13 +39,6 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				filter: action.filter || '',
-			};
-		}
-
-		case SET_CATEGORY_STATUS: {
-			return {
-				...state,
-				list: [...action.list],
 			};
 		}
 

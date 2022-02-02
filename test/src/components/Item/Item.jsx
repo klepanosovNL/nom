@@ -1,22 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategory } from '../../store/actionCreators';
+import { setCategoryStatus } from '../../store/actionCreators';
 
-export const Item = ({ name, description, allowed }) => {
+export const Item = ({ name, description, allowed, blocked }) => {
 	const allList = useSelector((store) => store.list);
 	const dispatch = useDispatch();
 
 	const handleInputChange = (e) => {
 		const checkBoxName = e.target.nextSibling.innerText.toLowerCase();
 
-		//TODO debug
-		allList.map((element) => {
+		allList.forEach((element) => {
 			if (element.name.toLowerCase() === checkBoxName)
 				element.allowed = !element.allowed;
-
-			return element;
 		});
 
-		dispatch(setCategory(allList));
+		dispatch(setCategoryStatus(allList));
 	};
 
 	return (
@@ -25,6 +22,7 @@ export const Item = ({ name, description, allowed }) => {
 				type='checkbox'
 				checked={allowed ? true : false}
 				onChange={handleInputChange}
+				disabled={blocked ? true : false}
 			/>
 			<div className='items_item-title'>{name}</div>
 			<div className='items_item-container'>

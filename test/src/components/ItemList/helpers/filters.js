@@ -1,13 +1,13 @@
 export const filterList = (array, currentPreset) => {
 	switch (currentPreset) {
 		case 'none':
-			return array.filter((element) => element.allowed);
+			return array.filter((element) => !element.blocked);
 
 		case 'low':
 			return array.filter((element) => element.low);
 
 		case 'strong':
-			return array.filter((element) => element.strong);
+			return array.filter((element) => element.blocked);
 
 		case 'custom':
 			return [];
@@ -18,7 +18,7 @@ export const filterList = (array, currentPreset) => {
 };
 
 export const filterCategory = (array, category) => {
-	switch (category) {
+	switch (category.toLowerCase()) {
 		case 'allowed':
 			return array.filter((element) => element.allowed);
 

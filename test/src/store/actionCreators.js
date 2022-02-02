@@ -1,7 +1,6 @@
 import {
 	GET_LIST,
 	CHECK_CURRENT_PRESETS,
-	GET_VISIBLE_ITEMS,
 	SET_CATEGORY,
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
@@ -11,13 +10,6 @@ export const getList = (list) => {
 	return {
 		type: GET_LIST,
 		list,
-	};
-};
-
-export const getVisibleItems = (visibleList) => {
-	return {
-		type: GET_VISIBLE_ITEMS,
-		visibleList,
 	};
 };
 
@@ -43,7 +35,6 @@ export const setFilter = (filter) => {
 };
 
 export const setCategoryStatus = (list) => {
-	console.log(list);
 	return {
 		type: SET_CATEGORY_STATUS,
 		list,

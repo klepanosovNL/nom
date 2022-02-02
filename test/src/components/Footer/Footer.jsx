@@ -1,19 +1,42 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategory } from '../../store/actionCreators';
+import {
+	setCategory,
+	getList,
+	checkCurrentPreset,
+} from '../../store/actionCreators';
 import { getCategoriesCount } from '../ItemList/helpers/filters';
 
 import './footer_module.scss';
 
 export const Footer = () => {
 	const dispatch = useDispatch();
-	const categories = ['allowed', 'blocked'];
-	const actions = ['block all', 'allow all'];
+	const categories = ['Allowed', 'Blocked'];
+	const actions = ['Block all', 'Allow all'];
 	const filterCategories = useSelector((store) => store.filterCategories);
 	const currentPreset = useSelector((store) => store.currentPreset);
 	const allList = useSelector((store) => store.list);
 
 	const handleCategoryChange = (e) => {
 		dispatch(setCategory(e.target.id));
+	};
+
+	const handleActionClick = (e) => {
+		const { id } = e.target;
+
+		allList.forEach((element) => {
+			if (id === 'Block all') {
+				element.blocked = true;
+				element.allowed = false;
+			}
+
+			if (id === 'Allow all') {
+				element.allowed = true;
+				element.blocked = false;
+			}
+		});
+
+		dispatch(getList(allList));
+		dispatch(checkCurrentPreset('none'));
 	};
 
 	const categoryCount = getCategoriesCount(allList, currentPreset);
@@ -33,7 +56,7 @@ export const Footer = () => {
 								}`}
 								onClick={handleCategoryChange}
 							>
-								<span>{categoryCount[element]}</span>
+								<span>{categoryCount[element.toLocaleLowerCase()]}</span>
 								{element}
 							</div>
 						);
@@ -42,7 +65,12 @@ export const Footer = () => {
 			</div>
 			<div className='footer-actions'>
 				{actions.map((element) => (
-					<div key={element} className='footer-action'>
+					<div
+						key={element}
+						id={element}
+						className='footer-action'
+						onClick={handleActionClick}
+					>
 						{element}
 					</div>
 				))}
