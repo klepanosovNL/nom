@@ -4,6 +4,7 @@ import {
 	SET_CATEGORY,
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
+	SET_STATUS_FOR_ALL_ITEMS,
 } from './actionTypes';
 
 export const getList = (list) => {
@@ -38,5 +39,12 @@ export const setCategoryStatus = (list) => {
 	return {
 		type: SET_CATEGORY_STATUS,
 		list,
+	};
+};
+
+export const setStatusForAllItems = (buttonName) => {
+	return {
+		type: SET_STATUS_FOR_ALL_ITEMS,
+		blockedButton: buttonName,
 	};
 };

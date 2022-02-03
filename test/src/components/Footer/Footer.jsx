@@ -3,6 +3,7 @@ import {
 	setCategory,
 	getList,
 	checkCurrentPreset,
+	setStatusForAllItems,
 } from '../../store/actionCreators';
 import { getCategoriesCount } from '../ItemList/helpers/filters';
 
@@ -15,6 +16,7 @@ export const Footer = () => {
 	const filterCategories = useSelector((store) => store.filterCategories);
 	const currentPreset = useSelector((store) => store.currentPreset);
 	const allList = useSelector((store) => store.list);
+	const disabledButton = useSelector((store) => store.blockedButton);
 
 	const handleCategoryChange = (e) => {
 		dispatch(setCategory(e.target.id));
@@ -27,11 +29,15 @@ export const Footer = () => {
 			if (id === 'Block all') {
 				element.blocked = true;
 				element.allowed = false;
+
+				dispatch(setStatusForAllItems('Block all'));
 			}
 
 			if (id === 'Allow all') {
 				element.allowed = true;
 				element.blocked = false;
+
+				dispatch(setStatusForAllItems('Allow all'));
 			}
 		});
 
@@ -68,7 +74,9 @@ export const Footer = () => {
 					<div
 						key={element}
 						id={element}
-						className='footer-action'
+						className={`footer-action ${
+							element === disabledButton ? 'footer-action--disabled' : ''
+						} `}
 						onClick={handleActionClick}
 					>
 						{element}

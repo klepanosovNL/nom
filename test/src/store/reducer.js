@@ -4,6 +4,7 @@ import {
 	SET_CATEGORY,
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
+	SET_STATUS_FOR_ALL_ITEMS,
 } from './actionTypes';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
 	currentPreset: 'none',
 	filterCategories: '',
 	filter: '',
+	blockedButton: '',
 };
 
 export const reducer = (state = initialState, action) => {
@@ -39,6 +41,13 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				filter: action.filter || '',
+			};
+		}
+
+		case SET_STATUS_FOR_ALL_ITEMS: {
+			return {
+				...state,
+				blockedButton: action.blockedButton,
 			};
 		}
 

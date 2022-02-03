@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryStatus } from '../../store/actionCreators';
+import {
+	setCategoryStatus,
+	setStatusForAllItems,
+} from '../../store/actionCreators';
 
 export const Item = ({ name, description, allowed, blocked }) => {
 	const allList = useSelector((store) => store.list);
@@ -9,8 +12,11 @@ export const Item = ({ name, description, allowed, blocked }) => {
 		const checkBoxName = e.target.nextSibling.innerText.toLowerCase();
 
 		allList.forEach((element) => {
-			if (element.name.toLowerCase() === checkBoxName)
+			if (element.name.toLowerCase() === checkBoxName) {
 				element.allowed = !element.allowed;
+
+				dispatch(setStatusForAllItems(''));
+			}
 		});
 
 		dispatch(setCategoryStatus(allList));
