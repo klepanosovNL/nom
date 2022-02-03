@@ -10,7 +10,7 @@ export const filterList = (array, currentPreset) => {
 			return array.filter((element) => element.blocked);
 
 		case 'custom':
-			return [];
+			return array.filter((element) => element.custom);
 
 		default:
 			return array;

@@ -15,6 +15,11 @@ export const Item = ({ name, description, allowed, blocked }) => {
 			if (element.name.toLowerCase() === checkBoxName) {
 				element.allowed = !element.allowed;
 
+				if (element.blocked) {
+					element.custom = true;
+					element.blocked = !element.blocked;
+				}
+
 				dispatch(setStatusForAllItems(''));
 			}
 		});
@@ -23,12 +28,11 @@ export const Item = ({ name, description, allowed, blocked }) => {
 	};
 
 	return (
-		<div className='items_item'>
+		<div className={`items_item ${blocked ? 'items_item--disabled' : ''}`}>
 			<input
 				type='checkbox'
 				checked={allowed ? true : false}
 				onChange={handleInputChange}
-				disabled={blocked ? true : false}
 			/>
 			<div className='items_item-title'>{name}</div>
 			<div className='items_item-container'>
