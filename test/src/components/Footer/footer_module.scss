@@ -29,6 +29,11 @@
             height: fit-content;
             cursor: pointer;
 
+            &:hover, &:focus {
+                box-shadow: 0px 0px 2px 0px black;
+                transition: .1s;
+            }
+
             span {
                 margin-right: 4px;
                 font-weight: bold;
@@ -52,6 +57,11 @@
         font-size: 12px;
         color: $white;
         cursor: pointer;
+
+        &:hover, &:focus {
+            box-shadow: 0px 0px 3px 0px black;
+            transition: .1s;
+        }
 
         &:not(:last-child) {
             margin-right: 8px;
