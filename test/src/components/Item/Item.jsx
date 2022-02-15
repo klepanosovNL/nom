@@ -3,6 +3,7 @@ import {
 	setCategoryStatus,
 	setStatusForAllItems,
 } from '../../store/actionCreators';
+import './item_module.scss';
 
 export const Item = ({ name, description, allowed, blocked }) => {
 	const allList = useSelector((store) => store.list);
@@ -28,16 +29,16 @@ export const Item = ({ name, description, allowed, blocked }) => {
 	};
 
 	return (
-		<div className={`items_item ${blocked ? 'items_item--disabled' : ''}`}>
+		<div className={`items__item ${blocked ? 'items__item_disabled' : ''}`}>
 			<input
 				type='checkbox'
 				checked={allowed ? true : false}
 				onChange={handleInputChange}
 			/>
-			<div className='items_item-title'>{name}</div>
-			<div className='items_item-container'>
+			<div className='items__item__title'>{name}</div>
+			<div className='items__item__container'>
 				<i className='fa fa-exclamation-circle'></i>
-				<div className='items_item-container_description'>{description}</div>
+				<div className='items__item__description'>{description}</div>
 			</div>
 		</div>
 	);

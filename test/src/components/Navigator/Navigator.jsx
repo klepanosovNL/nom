@@ -29,8 +29,8 @@ export const Navigator = () => {
 			{filterNames.map((element) => {
 				return (
 					<li
-						className={`presets_item ${
-							currentPreset === element ? 'selected' : ''
+						className={`presets__item ${
+							currentPreset === element ? 'presets__item_selected' : ''
 						}`}
 						onClick={clickHandler}
 						key={element}

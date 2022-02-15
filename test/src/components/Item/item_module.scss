@@ -1,0 +1,59 @@
+@import '../Common/styles.scss';
+
+.items {
+    &__item {
+        display: flex;
+        align-items: center;
+        max-width: 168px;
+        position: relative;
+    
+        &__container {
+            margin-left: auto;
+            transition: .3s;
+        
+            &:hover {
+                cursor: help;
+    
+                .items__item__description {
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    background-color: $white;
+                    border-radius: 12px;
+                    border: 1px solid $white2;
+                    z-index: 1;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    font-size: 12px;
+                    opacity: 1;
+                }
+            }
+    
+            i {
+                color: $grey;
+            }
+        }
+
+        &__description {
+            display: none;
+            opacity: 0;
+        }
+    
+        input {
+            height: 24px;
+            width: 24px;
+            margin-right: 12px;
+            cursor: pointer;
+            flex: none;
+            border: 1px solid $blue2;
+            border-radius: 4px;
+        }
+    
+        &_disabled {
+            input {
+                box-shadow: inset 0px 0px 0px 2px $red;
+            }
+        }
+    }
+}

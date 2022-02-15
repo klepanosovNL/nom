@@ -22,7 +22,7 @@ export const ItemList = () => {
 
 	return (
 		<div className='items'>
-			<div className='items_container'>
+			<div className='items__container'>
 				{getFilteredArray().map(({ name, description, allowed, blocked }) => (
 					<Item
 						key={name}
