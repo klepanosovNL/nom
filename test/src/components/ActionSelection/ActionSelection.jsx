@@ -7,9 +7,9 @@ import {
 } from '../../store/actionCreators';
 import { getCategoriesCount } from '../ItemList/helpers/filters';
 
-import './footer_module.scss';
+import './action-selection_module.scss';
 
-export const Footer = () => {
+export const ActionSelection = () => {
 	const dispatch = useDispatch();
 	const categories = ['Allowed', 'Blocked'];
 	const actions = ['Block all', 'Allow all'];
@@ -48,16 +48,16 @@ export const Footer = () => {
 	const categoryCount = getCategoriesCount(allList, currentPreset);
 
 	return (
-		<div className='footer'>
-			<div className='footer_categories-panel'>
+		<div className='action-selection'>
+			<div className='action-selection__categories-panel'>
 				<span>Filter Categories:</span>
-				<div className='footer_categories-panel_items'>
+				<div className='action-selection__categories-panel__items'>
 					{categories.map((element) => {
 						return (
 							<div
 								id={element}
 								key={element}
-								className={`footer_categories-panel_item ${
+								className={`action-selection__categories-panel__item ${
 									filterCategories === element ? 'selected' : ''
 								}`}
 								onClick={handleCategoryChange}
@@ -69,13 +69,15 @@ export const Footer = () => {
 					})}
 				</div>
 			</div>
-			<div className='footer-actions'>
+			<div className='action-selection__actions'>
 				{actions.map((element) => (
 					<div
 						key={element}
 						id={element}
-						className={`footer-action ${
-							element === disabledButton ? 'footer-action--disabled' : ''
+						className={`action-selection__action ${
+							element === disabledButton
+								? 'action-selection__action_disabled'
+								: ''
 						} `}
 						onClick={handleActionClick}
 					>

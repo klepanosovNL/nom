@@ -18,7 +18,6 @@ export const Search = () => {
 			<i className='fa fa-search'></i>
 			<input
 				value={filter}
-				type='text'
 				placeholder='Filter by name'
 				onChange={handleInputChange}
 				onFocus={handleInputFocus}
