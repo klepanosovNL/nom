@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter, checkCurrentPreset } from '../../store/actionCreators';
+import { Input } from '../Common/Components/Input/Input';
 import './search_module.scss';
 
 export const Search = () => {
@@ -16,12 +17,18 @@ export const Search = () => {
 	return (
 		<div className='search'>
 			<i className='fa fa-search'></i>
-			<input
+			<Input
 				value={filter}
 				placeholder='Filter by name'
 				onChange={handleInputChange}
 				onFocus={handleInputFocus}
-			></input>
+			/>
+			{/* <input
+				value={filter}
+				placeholder='Filter by name'
+				onChange={handleInputChange}
+				onFocus={handleInputFocus}
+			></input> */}
 		</div>
 	);
 };

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { getList } from './store/actionCreators';
+import { setList } from './store/actionCreators';
 import { useDispatch } from 'react-redux';
-import { items } from './api/api';
+// import { items } from './api/api';
 
 import { Navigator } from './components/Navigator/Navigator';
 import { Search } from './components/Search/Search';
@@ -14,7 +14,7 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getList(items));
+		dispatch(setList());
 	}, [dispatch]);
 
 	return (

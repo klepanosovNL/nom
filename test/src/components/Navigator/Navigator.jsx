@@ -2,44 +2,63 @@ import { filterNames } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	checkCurrentPreset,
-	setCategory,
-	setFilter,
+	setNewField,
+	// setCategory,
+	// setFilter,
 } from '../../store/actionCreators';
 import './navigator_module.scss';
+import { Button } from '../Common/Components/Button/Button';
 
 export const Navigator = () => {
 	const dispatch = useDispatch();
 	const currentPreset = useSelector((store) => store.currentPreset);
-	const filterCategories = useSelector((store) => store.filterCategories);
-	const inputValue = useSelector((store) => store.filter);
+	// const store = useSelector((store) => store);
 
-	const clickHandler = (e) => {
-		e.stopPropagation();
+	// const filterCategories = useSelector((store) => store.filterCategories);
+	// const inputValue = useSelector((store) => store.filter);
 
-		const { id } = e.target;
+	const clickHandler = (name) => {
+		// e.stopPropagation();
 
-		if (filterCategories) dispatch(setCategory());
-		if (inputValue) dispatch(setFilter(''));
+		// const { id } = e.target;
+		// console.log(name);
+		// if (filterCategories) dispatch(setCategory());
+		// if (inputValue) dispatch(setFilter(''));
 
-		dispatch(checkCurrentPreset(id));
+		dispatch(checkCurrentPreset(name));
+
+		if (name === 'strong') {
+			dispatch(setNewField('isDisabled', true));
+		} else {
+			dispatch(setNewField('isDisabled', false));
+		}
+		// console.log(store);
 	};
 
 	return (
-		<ul className='presets'>
+		<div className='presets'>
 			{filterNames.map((element) => {
 				return (
-					<li
+					<Button
 						className={`presets__item ${
 							currentPreset === element ? 'presets__item_selected' : ''
 						}`}
-						onClick={clickHandler}
+						clickHandler={() => clickHandler(element)}
+						content={element}
 						key={element}
-						id={element}
-					>
-						{element}
-					</li>
+					/>
+					// <li
+					// 	className={`presets__item ${
+					// 		currentPreset === element ? 'presets__item_selected' : ''
+					// 	}`}
+					// 	onClick={clickHandler}
+					// 	key={element}
+					// 	id={element}
+					// >
+					// 	{element}
+					// </li>
 				);
 			})}
-		</ul>
+		</div>
 	);
 };

@@ -1,15 +1,16 @@
 import {
-	GET_LIST,
+	SET_LIST,
 	CHECK_CURRENT_PRESETS,
 	SET_CATEGORY,
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
 	SET_STATUS_FOR_ALL_ITEMS,
+	SET_NEW_FIELD,
 } from './actionTypes';
 
-export const getList = (list) => {
+export const setList = (list) => {
 	return {
-		type: GET_LIST,
+		type: SET_LIST,
 		list,
 	};
 };
@@ -48,3 +49,19 @@ export const setStatusForAllItems = (buttonName) => {
 		blockedButton: buttonName,
 	};
 };
+
+export const setNewField = (fieldName, value) => {
+	return {
+		type: SET_NEW_FIELD,
+		fieldName,
+		value,
+	};
+};
+
+// export const setNewField = (fieldName, value) => (getState) => {
+// 	const list = getState().list;
+
+// 	list.map((element) => (element[fieldName] = value));
+
+// 	// dispatch(getList(list));
+// };

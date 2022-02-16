@@ -1,11 +1,15 @@
 import {
-	GET_LIST,
+	SET_LIST,
 	CHECK_CURRENT_PRESETS,
 	SET_CATEGORY,
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
 	SET_STATUS_FOR_ALL_ITEMS,
+	SET_NEW_FIELD,
 } from './actionTypes';
+
+import { formatList } from '../utils/utils';
+import { items } from '../api/api';
 
 const initialState = {
 	list: [],
@@ -17,7 +21,11 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_LIST:
+		case SET_LIST:
+			return {
+				...state,
+				list: formatList(items),
+			};
 		case SET_CATEGORY_STATUS:
 			return {
 				...state,
@@ -48,6 +56,18 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				blockedButton: action.blockedButton,
+			};
+		}
+
+		case SET_NEW_FIELD: {
+			const list = state.list.map((element) => ({
+				...element,
+				[action.fieldName]: action.value,
+			}));
+
+			return {
+				...state,
+				list,
 			};
 		}
 

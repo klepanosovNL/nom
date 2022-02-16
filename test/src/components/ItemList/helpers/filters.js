@@ -1,4 +1,4 @@
-export const filterList = (array, currentPreset) => {
+export const filterListByCurrentPreset = (array, currentPreset) => {
 	switch (currentPreset) {
 		case 'none':
 			return array.filter((element) => !element.blocked);
