@@ -23,6 +23,7 @@ export const Item = ({ name, description, allowed, blocked, isDisabled }) => {
 		// });
 		// dispatch(setCategoryStatus(allList));
 		// console.log(name);
+		// console.log(name);
 	};
 
 	return (
@@ -32,8 +33,14 @@ export const Item = ({ name, description, allowed, blocked, isDisabled }) => {
 				checked={allowed ? true : false}
 				onChange={handleInputChange}
 			/> */}
-			<Checkbox type='checkbox' onChange={() => handleInputChange(name)} />
-			<div className='items__item__title'>{name}</div>
+
+			<label className='items__item__title'>
+				<Checkbox type='checkbox' onChange={() => handleInputChange(name)} />
+				<i className='fa fa-light fa-ban'></i>
+				<i className='fa fa-duotone fa-check'></i>
+
+				{name}
+			</label>
 			<div className='items__item__container'>
 				<i className='fa fa-exclamation-circle'></i>
 				<div className='items__item__description'>{description}</div>

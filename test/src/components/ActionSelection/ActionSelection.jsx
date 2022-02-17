@@ -47,7 +47,7 @@ export const ActionSelection = () => {
 	return (
 		<div className='action-selection'>
 			<div className='action-selection__categories-panel'>
-				<span>Filter Categories:</span>
+				<span>Filter Categories</span>
 				<div className='action-selection__categories-panel__items'>
 					<Button
 						content='Allowed'

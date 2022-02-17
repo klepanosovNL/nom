@@ -1,14 +1,18 @@
 @import '../Common/Styles/styles.scss';
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
 
 .items {
     &__item {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        max-width: 168px;
         position: relative;
+        width: 100%;
+        margin-bottom: 14px;
+        font-size: 12px;
+        max-width: 164px;
     
         &__container {
-            margin-left: auto;
+            margin-left: 10px;
             transition: .3s;
         
             &:hover {
@@ -41,18 +45,57 @@
         }
     
         input {
-            height: 24px;
-            width: 24px;
-            margin-right: 12px;
-            cursor: pointer;
-            flex: none;
-            border: 1px solid $blue2;
-            border-radius: 4px;
+            display: none;
         }
-    
+
+        .fa-ban, .fa-check {
+            position: absolute;
+            left: 11px;
+            font-size: 14px;
+        }
+
+        .fa-ban {
+            display: none;
+            color: $red2
+        }
+
+        .fa-check {
+            color: $green;
+        }
+
         &_disabled {
-            input {
-                box-shadow: inset 0px 0px 0px 2px $red;
+            .fa-ban {
+                display: block;
+            }
+
+            .fa-check {
+                display: none;
+            }
+        }
+
+        &__title {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;            
+            cursor: pointer;
+            padding: 5px;
+            box-sizing: border-box;
+            position: relative;
+
+            &:before {
+                content: '';
+
+                height: 22px;
+                width: 22px;
+                margin-right: 12px;
+                flex: none;
+                border: 1px solid $blue2;
+                border-radius: 4px;
+            }
+
+            &:hover {
+                background-color: $grey4;
+                transition: .2s;
             }
         }
     }

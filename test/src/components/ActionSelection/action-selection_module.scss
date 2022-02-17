@@ -11,12 +11,13 @@
 
     &__categories-panel, &__actions {
         display: flex;
+        align-items: center;
     }
 
     &__categories-panel {
         &__items {
             display: flex;
-            margin-left: 24px;
+            margin-left: 28px;
         }
 
         &__item {
@@ -25,7 +26,6 @@
             background-color: $white;
             box-sizing: border-box;
             padding: 4px 16px;
-            font-size: 12px;
             height: fit-content;
             cursor: pointer;
 
@@ -48,13 +48,16 @@
                 color: $white;
             }
         }
+
+       & > span {
+        font-size: 12px;
+        }
     }
 
     &__action {
         background-color: $blue2;
         border-radius: 4px;
         padding: 8px 12px;
-        font-size: 12px;
         color: $white;
         cursor: pointer;
 

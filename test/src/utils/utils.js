@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const formatList = (list) => {
 	return list
 		.sort((current, next) => current.name.localeCompare(next.name))
@@ -5,17 +7,17 @@ export const formatList = (list) => {
 };
 
 export const toggleDisabledList = (list, value) => {
-	return list.map((element) => ({
+	return _.map(list, (element) => ({
 		...element,
 		isDisabled: value,
 	}));
 };
 
 export const toggleDisabledItemByName = (list, names) => {
-	return list.map((element) => {
+	return _.map(list, (element) => {
 		return {
 			...element,
-			isDisabled: names.includes(element.name),
+			isDisabled: _.includes(names, element.name),
 		};
 	});
 };
