@@ -23,12 +23,6 @@ export const Search = () => {
 				onChange={handleInputChange}
 				onFocus={handleInputFocus}
 			/>
-			{/* <input
-				value={filter}
-				placeholder='Filter by name'
-				onChange={handleInputChange}
-				onFocus={handleInputFocus}
-			></input> */}
 		</div>
 	);
 };

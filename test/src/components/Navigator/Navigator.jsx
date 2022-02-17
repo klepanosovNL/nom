@@ -2,12 +2,14 @@ import { filterNames } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	checkCurrentPreset,
-	setNewField,
+	toggleDisabledField,
+	toggleDisabledFieldByName,
 	// setCategory,
 	// setFilter,
 } from '../../store/actionCreators';
 import './navigator_module.scss';
 import { Button } from '../Common/Components/Button/Button';
+import _ from 'lodash';
 
 export const Navigator = () => {
 	const dispatch = useDispatch();
@@ -27,17 +29,43 @@ export const Navigator = () => {
 
 		dispatch(checkCurrentPreset(name));
 
-		if (name === 'strong') {
-			dispatch(setNewField('isDisabled', true));
-		} else {
-			dispatch(setNewField('isDisabled', false));
+		switch (name) {
+			case 'low':
+				dispatch(toggleDisabledField(false));
+				dispatch(
+					toggleDisabledFieldByName([
+						'Literature',
+						'Software',
+						'Dogs',
+						'Cartoons',
+					])
+				);
+				break;
+
+			case 'strong':
+				dispatch(toggleDisabledField(true));
+				break;
+
+			case 'custom':
+			case 'none':
+				dispatch(toggleDisabledField(false));
+				break;
+
+			default:
+				break;
 		}
+
+		// if (name === 'strong') {
+		// 	dispatch(toggleDisabledField(true));
+		// } else {
+		// 	dispatch(toggleDisabledField(false));
+		// }
 		// console.log(store);
 	};
 
 	return (
 		<div className='presets'>
-			{filterNames.map((element) => {
+			{_.map(filterNames, (element) => {
 				return (
 					<Button
 						className={`presets__item ${
@@ -47,16 +75,6 @@ export const Navigator = () => {
 						content={element}
 						key={element}
 					/>
-					// <li
-					// 	className={`presets__item ${
-					// 		currentPreset === element ? 'presets__item_selected' : ''
-					// 	}`}
-					// 	onClick={clickHandler}
-					// 	key={element}
-					// 	id={element}
-					// >
-					// 	{element}
-					// </li>
 				);
 			})}
 		</div>

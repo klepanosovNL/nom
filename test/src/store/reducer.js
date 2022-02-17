@@ -5,10 +5,15 @@ import {
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
 	SET_STATUS_FOR_ALL_ITEMS,
-	SET_NEW_FIELD,
+	TOGGLE_DISABLED_FIELD,
+	TOGGLE_DISABLED_FIELD_BY_NAME,
 } from './actionTypes';
 
-import { formatList } from '../utils/utils';
+import {
+	formatList,
+	toggleDisabledList,
+	toggleDisabledItemByName,
+} from '../utils/utils';
 import { items } from '../api/api';
 
 const initialState = {
@@ -59,15 +64,17 @@ export const reducer = (state = initialState, action) => {
 			};
 		}
 
-		case SET_NEW_FIELD: {
-			const list = state.list.map((element) => ({
-				...element,
-				[action.fieldName]: action.value,
-			}));
-
+		case TOGGLE_DISABLED_FIELD: {
 			return {
 				...state,
-				list,
+				list: toggleDisabledList(state.list, action.value),
+			};
+		}
+
+		case TOGGLE_DISABLED_FIELD_BY_NAME: {
+			return {
+				...state,
+				list: toggleDisabledItemByName(state.list, action.names),
 			};
 		}
 

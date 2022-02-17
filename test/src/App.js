@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
 import { setList } from './store/actionCreators';
 import { useDispatch } from 'react-redux';
-// import { items } from './api/api';
 
 import { Navigator } from './components/Navigator/Navigator';
 import { Search } from './components/Search/Search';
 import { ItemList } from './components/ItemList/ItemList';
 import { ActionSelection } from './components/ActionSelection/ActionSelection';
-
 import './App.css';
 
 function App() {

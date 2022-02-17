@@ -5,7 +5,8 @@ import {
 	SET_FILTER,
 	SET_CATEGORY_STATUS,
 	SET_STATUS_FOR_ALL_ITEMS,
-	SET_NEW_FIELD,
+	TOGGLE_DISABLED_FIELD,
+	TOGGLE_DISABLED_FIELD_BY_NAME,
 } from './actionTypes';
 
 export const setList = (list) => {
@@ -50,18 +51,16 @@ export const setStatusForAllItems = (buttonName) => {
 	};
 };
 
-export const setNewField = (fieldName, value) => {
+export const toggleDisabledField = (value) => {
 	return {
-		type: SET_NEW_FIELD,
-		fieldName,
+		type: TOGGLE_DISABLED_FIELD,
 		value,
 	};
 };
 
-// export const setNewField = (fieldName, value) => (getState) => {
-// 	const list = getState().list;
-
-// 	list.map((element) => (element[fieldName] = value));
-
-// 	// dispatch(getList(list));
-// };
+export const toggleDisabledFieldByName = (names) => {
+	return {
+		type: TOGGLE_DISABLED_FIELD_BY_NAME,
+		names,
+	};
+};

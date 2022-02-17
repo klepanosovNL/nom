@@ -1,15 +1,16 @@
 import './item-list_module.scss';
 import { useSelector } from 'react-redux';
 import { Item } from '../Item/Item';
-import {
-	filterByName,
-	filterCategory,
-	filterList,
-	filterListByCurrentPreset,
-} from './helpers/filters';
+import _ from 'lodash';
+// import {
+// 	filterByName,
+// 	filterCategory,
+// 	filterList,
+// 	filterListByCurrentPreset,
+// } from './helpers/filters';
 
 export const ItemList = () => {
-	const currentPreset = useSelector((store) => store.currentPreset);
+	// const currentPreset = useSelector((store) => store.currentPreset);
 	// const filterCategories = useSelector((store) => store.filterCategories);
 	// const filter = useSelector((store) => store.filter);
 	const allList = useSelector((store) => store.list);
@@ -28,8 +29,8 @@ export const ItemList = () => {
 	return (
 		<div className='items'>
 			<div className='items__container'>
-				{/* filterListByCurrentPreset(allList, currentPreset) */}
-				{allList.map(
+				{_.map(
+					allList,
 					({ name, description, isDisabled /*allowed, blocked*/ }) => (
 						<Item
 							key={name}
