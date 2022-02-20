@@ -2,42 +2,37 @@ import './item-list_module.scss';
 import { useSelector } from 'react-redux';
 import { Item } from '../Item/Item';
 import _ from 'lodash';
-// import {
-// 	filterByName,
-// 	filterCategory,
-// 	filterList,
-// 	filterListByCurrentPreset,
-// } from './helpers/filters';
+import { filterByName, filterByCategory } from './helpers/filters';
+import {
+	allListSelector,
+	customListSelector,
+	filterByNameSelector,
+	currentPresetSelector,
+	filterByCategoriesSelector,
+} from '../../store/selectors';
 
 export const ItemList = () => {
-	// const currentPreset = useSelector((store) => store.currentPreset);
-	// const filterCategories = useSelector((store) => store.filterCategories);
-	// const filter = useSelector((store) => store.filter);
-	const allList = useSelector((store) => store.list);
-
-	// const getFilteredArray = () => {
-	// 	// const filteredByPreset = filterList(
-	// 	// 	filterByName(allList, filter),
-	// 	// 	currentPreset
-	// 	// );
-	// console.log(allList);
-	// 	// return filterCategories
-	// 	// 	? filterCategory(filteredByPreset, filterCategories)
-	// 	// 	: filteredByPreset;
-	// };
+	const currentPreset = useSelector(currentPresetSelector);
+	const filterName = useSelector(filterByNameSelector);
+	const list = useSelector(allListSelector);
+	const customs = useSelector(customListSelector);
+	const currentCategory = useSelector(filterByCategoriesSelector);
+	const renderList = currentPreset === 'custom' ? customs : list;
 
 	return (
 		<div className='items'>
 			<div className='items__container'>
 				{_.map(
-					allList,
-					({ name, description, isDisabled /*allowed, blocked*/ }) => (
+					filterByName(
+						filterByCategory(renderList, currentCategory),
+						filterName
+					),
+					({ name, description, isDisabled }) => (
 						<Item
 							key={name}
 							name={name}
 							description={description}
 							isDisabled={isDisabled}
-							// blocked={blocked}
 						/>
 					)
 				)}

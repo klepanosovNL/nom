@@ -43,7 +43,7 @@
                 margin-right: 8px;
             }
 
-            &.selected {
+            &_selected {
                 background-color: $blue3;
                 color: $white;
             }
@@ -53,7 +53,7 @@
         font-size: 12px;
         }
     }
-
+    
     &__action {
         background-color: $blue2;
         border-radius: 4px;
@@ -70,7 +70,7 @@
             margin-right: 8px;
         }
 
-        &--disabled {
+        &_disabled {
             pointer-events: none;
             background-color: $blue3;
         }

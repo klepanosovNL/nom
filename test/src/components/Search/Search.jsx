@@ -1,18 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, checkCurrentPreset } from '../../store/actionCreators';
+import {
+	setFilterByName,
+	setCurrentPreset,
+	toggleDisabledItems,
+} from '../../store/actionCreators';
 import { Input } from '../Common/Components/Input/Input';
+import { filterByNameSelector } from '../../store/selectors';
 import './search_module.scss';
 
 export const Search = () => {
 	const dispatch = useDispatch();
 
-	const filter = useSelector((store) => store.filter);
+	const filter = useSelector(filterByNameSelector);
 
 	const handleInputChange = (e) => {
-		dispatch(setFilter(e.target.value));
+		dispatch(setFilterByName(e.target.value));
 	};
 
-	const handleInputFocus = () => dispatch(checkCurrentPreset('none'));
+	const handleInputFocus = () => {
+		dispatch(setCurrentPreset('none'));
+		dispatch(toggleDisabledItems(false));
+	};
 
 	return (
 		<div className='search'>

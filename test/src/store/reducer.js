@@ -2,58 +2,55 @@ import {
 	SET_LIST,
 	CHECK_CURRENT_PRESETS,
 	SET_CATEGORY,
-	SET_FILTER,
+	SET_FILTER_BY_NAME,
 	SET_CATEGORY_STATUS,
 	SET_STATUS_FOR_ALL_ITEMS,
-	TOGGLE_DISABLED_FIELD,
-	TOGGLE_DISABLED_FIELD_BY_NAME,
+	TOGGLE_DISABLED_ITEMS,
+	TOGGLE_DISABLED_ITEMS_BY_NAME,
+	TOGGLE_CHECKBOX,
+	SET_CUSTOM,
+	TOGGLE_CHECKBOX_IN_CUSTOM,
 } from './actionTypes';
-
-import {
-	formatList,
-	toggleDisabledList,
-	toggleDisabledItemByName,
-} from '../utils/utils';
-import { items } from '../api/api';
 
 const initialState = {
 	list: [],
 	currentPreset: 'none',
-	filterCategories: '',
-	filter: '',
+	filterByCategories: '',
+	filterByNameInput: '',
 	blockedButton: '',
+	customs: [],
 };
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_LIST:
-			return {
-				...state,
-				list: formatList(items),
-			};
 		case SET_CATEGORY_STATUS:
+		case TOGGLE_DISABLED_ITEMS:
+		case TOGGLE_DISABLED_ITEMS_BY_NAME:
+		case TOGGLE_CHECKBOX:
 			return {
 				...state,
-				list: [...action.list],
+				list: action.list,
 			};
 
 		case CHECK_CURRENT_PRESETS:
 			return {
 				...state,
-				currentPreset: action.currentPreset,
+				currentPreset: action.payload.currentPreset,
+				list: action.payload.list,
 			};
 
 		case SET_CATEGORY: {
 			return {
 				...state,
-				filterCategories: action.category || '',
+				filterByCategories: action.category || '',
 			};
 		}
 
-		case SET_FILTER: {
+		case SET_FILTER_BY_NAME: {
 			return {
 				...state,
-				filter: action.filter || '',
+				filterByNameInput: action.filterByNameInput || '',
 			};
 		}
 
@@ -64,17 +61,17 @@ export const reducer = (state = initialState, action) => {
 			};
 		}
 
-		case TOGGLE_DISABLED_FIELD: {
+		case TOGGLE_CHECKBOX_IN_CUSTOM: {
 			return {
 				...state,
-				list: toggleDisabledList(state.list, action.value),
+				customs: action.customs,
 			};
 		}
 
-		case TOGGLE_DISABLED_FIELD_BY_NAME: {
+		case SET_CUSTOM: {
 			return {
 				...state,
-				list: toggleDisabledItemByName(state.list, action.names),
+				customs: action.customs,
 			};
 		}
 

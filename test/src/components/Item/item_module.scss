@@ -55,22 +55,11 @@
         }
 
         .fa-ban {
-            display: none;
             color: $red2
         }
 
         .fa-check {
             color: $green;
-        }
-
-        &_disabled {
-            .fa-ban {
-                display: block;
-            }
-
-            .fa-check {
-                display: none;
-            }
         }
 
         &__title {

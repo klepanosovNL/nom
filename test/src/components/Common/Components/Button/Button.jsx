@@ -1,9 +1,9 @@
 import './button_module.scss';
 
-export const Button = ({ content, clickHandler, className }) => {
+export const Button = ({ children, clickHandler, className = '' }) => {
 	return (
 		<button onClick={clickHandler} className={`btn_default ${className}`}>
-			{content}
+			{children}
 		</button>
 	);
 };

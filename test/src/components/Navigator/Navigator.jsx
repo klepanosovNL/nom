@@ -1,39 +1,26 @@
 import { filterNames } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	checkCurrentPreset,
-	toggleDisabledField,
-	toggleDisabledFieldByName,
-	// setCategory,
-	// setFilter,
+	setCurrentPreset,
+	toggleDisabledItems,
+	toggleDisabledItemsByName,
 } from '../../store/actionCreators';
 import './navigator_module.scss';
 import { Button } from '../Common/Components/Button/Button';
 import _ from 'lodash';
-
+import { currentPresetSelector } from '../../store/selectors';
 export const Navigator = () => {
 	const dispatch = useDispatch();
-	const currentPreset = useSelector((store) => store.currentPreset);
-	// const store = useSelector((store) => store);
-
-	// const filterCategories = useSelector((store) => store.filterCategories);
-	// const inputValue = useSelector((store) => store.filter);
+	const currentPreset = useSelector(currentPresetSelector);
 
 	const clickHandler = (name) => {
-		// e.stopPropagation();
-
-		// const { id } = e.target;
-		// console.log(name);
-		// if (filterCategories) dispatch(setCategory());
-		// if (inputValue) dispatch(setFilter(''));
-
-		dispatch(checkCurrentPreset(name));
+		dispatch(setCurrentPreset(name));
 
 		switch (name) {
 			case 'low':
-				dispatch(toggleDisabledField(false));
+				dispatch(toggleDisabledItems(false));
 				dispatch(
-					toggleDisabledFieldByName([
+					toggleDisabledItemsByName([
 						'Literature',
 						'Software',
 						'Dogs',
@@ -43,24 +30,15 @@ export const Navigator = () => {
 				break;
 
 			case 'strong':
-				dispatch(toggleDisabledField(true));
+				dispatch(toggleDisabledItems(true));
 				break;
-
-			case 'custom':
 			case 'none':
-				dispatch(toggleDisabledField(false));
+				dispatch(toggleDisabledItems(false));
 				break;
 
 			default:
 				break;
 		}
-
-		// if (name === 'strong') {
-		// 	dispatch(toggleDisabledField(true));
-		// } else {
-		// 	dispatch(toggleDisabledField(false));
-		// }
-		// console.log(store);
 	};
 
 	return (
@@ -72,9 +50,10 @@ export const Navigator = () => {
 							currentPreset === element ? 'presets__item_selected' : ''
 						}`}
 						clickHandler={() => clickHandler(element)}
-						content={element}
 						key={element}
-					/>
+					>
+						{element}
+					</Button>
 				);
 			})}
 		</div>

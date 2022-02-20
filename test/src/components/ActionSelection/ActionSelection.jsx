@@ -1,48 +1,71 @@
 import { Button } from '../Common/Components/Button/Button';
 
-import { useDispatch /*useSelector*/ } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	setCategory,
-	// getList,
-	// checkCurrentPreset,
-	// setStatusForAllItems,
+	setCurrentPreset,
+	setStatusForAllItems,
+	toggleDisabledItems,
 } from '../../store/actionCreators';
-// import { getCategoriesCount } from '../ItemList/helpers/filters';
+import {
+	disableButtonSelector,
+	currentPresetSelector,
+	allListSelector,
+	customListSelector,
+	filterByCategoriesSelector,
+} from '../../store/selectors';
 
 import './action-selection_module.scss';
 
 export const ActionSelection = () => {
 	const dispatch = useDispatch();
-	// const categories = ['Allowed', 'Blocked'];
-	// const actions = ['Block all', 'Allow all'];
-	// const filterCategories = useSelector((store) => store.filterCategories);
-	// const currentPreset = useSelector((store) => store.currentPreset);
-	// const allList = useSelector((store) => store.list);
-	// const disabledButton = useSelector((store) => store.blockedButton);
+	const isDisableBtn = useSelector(disableButtonSelector);
+	const isCurrentPreset = useSelector(currentPresetSelector);
+	const list = useSelector(allListSelector);
+	const customs = useSelector(customListSelector);
+	const currentFilter = useSelector(filterByCategoriesSelector);
+
+	let disabledItemsLength;
+	let allowedItemsLength;
+
+	if (isCurrentPreset === 'custom') {
+		disabledItemsLength = customs.reduce(
+			(previousValue, currentValue) =>
+				currentValue.isDisabled ? previousValue + 1 : previousValue,
+			0
+		);
+		allowedItemsLength = customs.length - disabledItemsLength;
+	} else {
+		disabledItemsLength = list.reduce(
+			(previousValue, currentValue) =>
+				currentValue.isDisabled ? previousValue + 1 : previousValue,
+			0
+		);
+
+		allowedItemsLength = list.length - disabledItemsLength;
+	}
 
 	const handleCategoryChange = (e) => {
-		dispatch(setCategory(e.target.id));
+		const buttonName = e.target.innerText.replace(/[0-9]/g, '');
+		currentFilter
+			? dispatch(setCategory(''))
+			: dispatch(setCategory(buttonName));
 	};
 
-	const handleActionClick = () => {
-		// const { id } = e.target;
-		// allList.forEach((element) => {
-		// 	if (id === 'Block all') {
-		// 		element.blocked = true;
-		// 		element.allowed = false;
-		// 		dispatch(setStatusForAllItems('Block all'));
-		// 	}
-		// 	if (id === 'Allow all') {
-		// 		element.allowed = true;
-		// 		element.blocked = false;
-		// 		dispatch(setStatusForAllItems('Allow all'));
-		// 	}
-		// });
-		// dispatch(getList(allList));
-		// dispatch(checkCurrentPreset('none'));
-	};
+	const handleActionClick = (e) => {
+		const buttonName = e.target.innerText;
 
-	// const categoryCount = getCategoriesCount(allList, currentPreset);
+		if (buttonName === 'Allow all') {
+			dispatch(setCurrentPreset('none'));
+			dispatch(toggleDisabledItems(false));
+		}
+		if (buttonName === 'Block all') {
+			dispatch(setCurrentPreset('strong'));
+			dispatch(toggleDisabledItems(true));
+		}
+
+		dispatch(setStatusForAllItems(buttonName));
+	};
 
 	return (
 		<div className='action-selection'>
@@ -50,58 +73,50 @@ export const ActionSelection = () => {
 				<span>Filter Categories</span>
 				<div className='action-selection__categories-panel__items'>
 					<Button
-						content='Allowed'
 						clickHandler={handleCategoryChange}
-						className='action-selection__categories-panel__item'
-					/>
+						className={`action-selection__categories-panel__item ${
+							currentFilter === 'Allowed'
+								? 'action-selection__categories-panel__item_selected'
+								: ''
+						}`}
+					>
+						<span>{allowedItemsLength}</span>
+						Allowed
+					</Button>
 					<Button
-						content='Blocked'
 						clickHandler={handleCategoryChange}
-						className='action-selection__categories-panel__item'
-					/>
-
-					{/* {categories.map((element) => {
-						return (
-							<div
-								id={element}
-								key={element}
-								className={`action-selection__categories-panel__item ${
-									filterCategories === element ? 'selected' : ''
-								}`}
-								onClick={handleCategoryChange}
-							>
-								<span>{categoryCount[element.toLocaleLowerCase()]}</span>
-								{element}
-							</div>
-						);
-					})} */}
+						className={`action-selection__categories-panel__item ${
+							currentFilter === 'Blocked'
+								? 'action-selection__categories-panel__item_selected'
+								: ''
+						}`}
+					>
+						<span>{disabledItemsLength}</span>
+						Blocked
+					</Button>
 				</div>
 			</div>
 			<div className='action-selection__actions'>
 				<Button
-					content='Block all'
 					clickHandler={handleActionClick}
-					className='action-selection__action'
-				/>
+					className={`action-selection__action ${
+						isDisableBtn === 'Block all' || isCurrentPreset === 'strong'
+							? 'action-selection__action_disabled'
+							: ''
+					}`}
+				>
+					Block all
+				</Button>
 				<Button
-					content='Allow all'
 					clickHandler={handleActionClick}
-					className='action-selection__action'
-				/>
-				{/* {actions.map((element) => (
-					<div
-						key={element}
-						id={element}
-						className={`action-selection__action ${
-							element === disabledButton
-								? 'action-selection__action_disabled'
-								: ''
-						} `}
-						onClick={handleActionClick}
-					>
-						{element}
-					</div>
-				))} */}
+					className={`action-selection__action ${
+						isDisableBtn === 'Allow all' || isCurrentPreset === 'none'
+							? 'action-selection__action_disabled'
+							: ''
+					}`}
+				>
+					Allow all
+				</Button>
 			</div>
 		</div>
 	);
