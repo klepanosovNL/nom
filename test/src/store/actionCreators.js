@@ -22,7 +22,9 @@ import { items } from '../api/api';
 export const setList = () => {
 	return {
 		type: SET_LIST,
-		list: formatList(items),
+		payload: {
+			list: formatList(items),
+		},
 	};
 };
 
@@ -44,21 +46,27 @@ export const setCurrentPreset = (currentPreset) => (dispatch, getSate) => {
 export const setCategory = (category) => {
 	return {
 		type: SET_CATEGORY,
-		category,
+		payload: {
+			category,
+		},
 	};
 };
 
 export const setFilterByName = (filterByNameInput) => {
 	return {
 		type: SET_FILTER_BY_NAME,
-		filterByNameInput,
+		payload: {
+			filterByNameInput,
+		},
 	};
 };
 
 export const setStatusForAllItems = (buttonName) => {
 	return {
 		type: SET_STATUS_FOR_ALL_ITEMS,
-		blockedButton: buttonName,
+		payload: {
+			blockedButton: buttonName,
+		},
 	};
 };
 
@@ -67,7 +75,9 @@ export const toggleDisabledItems = (value) => (dispatch, getState) => {
 
 	dispatch({
 		type: TOGGLE_DISABLED_ITEMS,
-		list: toggleDisabledList(list, value),
+		payload: {
+			list: toggleDisabledList(list, value),
+		},
 	});
 };
 
@@ -76,7 +86,9 @@ export const toggleDisabledItemsByName = (names) => (dispatch, getState) => {
 
 	dispatch({
 		type: TOGGLE_DISABLED_ITEMS_BY_NAME,
-		list: toggleDisabledItemByName(list, names),
+		payload: {
+			list: toggleDisabledItemByName(list, names),
+		},
 	});
 };
 
@@ -87,7 +99,9 @@ export const checkBoxToggle = (name) => (dispatch, getState) => {
 	if (currentPreset === 'custom') {
 		return dispatch({
 			type: TOGGLE_CHECKBOX_IN_CUSTOM,
-			customs: toggleCheckboxStatus(customs, name),
+			payload: {
+				customs: toggleCheckboxStatus(customs, name),
+			},
 		});
 	} else {
 		dispatch(setCurrentPreset('custom'));
@@ -95,7 +109,9 @@ export const checkBoxToggle = (name) => (dispatch, getState) => {
 
 	dispatch({
 		type: TOGGLE_CHECKBOX,
-		list: toggleCheckboxStatus(list, name),
+		payload: {
+			list: toggleCheckboxStatus(list, name),
+		},
 	});
 
 	const element = list.find((item) => item.name === name);
@@ -104,7 +120,9 @@ export const checkBoxToggle = (name) => (dispatch, getState) => {
 	if (!element.isCustom) {
 		dispatch({
 			type: SET_CUSTOM,
-			customs: [...customs, element],
+			payload: {
+				customs: [...customs, element],
+			},
 		});
 	}
 

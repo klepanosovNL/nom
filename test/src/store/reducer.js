@@ -30,7 +30,7 @@ export const reducer = (state = initialState, action) => {
 		case TOGGLE_CHECKBOX:
 			return {
 				...state,
-				list: action.list,
+				list: action.payload.list,
 			};
 
 		case CHECK_CURRENT_PRESETS:
@@ -43,35 +43,35 @@ export const reducer = (state = initialState, action) => {
 		case SET_CATEGORY: {
 			return {
 				...state,
-				filterByCategories: action.category || '',
+				filterByCategories: action.payload.category || '',
 			};
 		}
 
 		case SET_FILTER_BY_NAME: {
 			return {
 				...state,
-				filterByNameInput: action.filterByNameInput || '',
+				filterByNameInput: action.payload.filterByNameInput || '',
 			};
 		}
 
 		case SET_STATUS_FOR_ALL_ITEMS: {
 			return {
 				...state,
-				blockedButton: action.blockedButton,
+				blockedButton: action.payload.blockedButton,
 			};
 		}
 
 		case TOGGLE_CHECKBOX_IN_CUSTOM: {
 			return {
 				...state,
-				customs: action.customs,
+				customs: action.payload.customs,
 			};
 		}
 
 		case SET_CUSTOM: {
 			return {
 				...state,
-				customs: action.customs,
+				customs: action.payload.customs,
 			};
 		}
 
