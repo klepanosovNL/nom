@@ -3,69 +3,35 @@ import { Button } from '../Common/Components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	setCategory,
-	setCurrentPreset,
-	setStatusForAllItems,
-	toggleDisabledItems,
+	toggleAllToBlock,
+	toggleAllToAllow,
 } from '../../store/actionCreators';
 import {
-	disableButtonSelector,
-	currentPresetSelector,
 	allListSelector,
-	customListSelector,
 	filterByCategoriesSelector,
+	blockedListSelector,
 } from '../../store/selectors';
 
 import './action-selection_module.scss';
 
 export const ActionSelection = () => {
 	const dispatch = useDispatch();
-	const isDisableBtn = useSelector(disableButtonSelector);
-	const isCurrentPreset = useSelector(currentPresetSelector);
+
 	const list = useSelector(allListSelector);
-	const customs = useSelector(customListSelector);
+	const blockedList = useSelector(blockedListSelector);
 	const currentFilter = useSelector(filterByCategoriesSelector);
 
-	let disabledItemsLength;
-	let allowedItemsLength;
+	const blockedItemsLength = blockedList.length;
+	const allowedItemsLength = list.length - blockedItemsLength;
 
-	if (isCurrentPreset === 'custom') {
-		disabledItemsLength = customs.reduce(
-			(previousValue, currentValue) =>
-				currentValue.isDisabled ? previousValue + 1 : previousValue,
-			0
-		);
-		allowedItemsLength = customs.length - disabledItemsLength;
-	} else {
-		disabledItemsLength = list.reduce(
-			(previousValue, currentValue) =>
-				currentValue.isDisabled ? previousValue + 1 : previousValue,
-			0
-		);
+	const isAllowAllDisabled = !!blockedItemsLength;
+	const isBlockAllDisabled = !!allowedItemsLength;
 
-		allowedItemsLength = list.length - disabledItemsLength;
-	}
-
-	const handleCategoryChange = (e) => {
-		const buttonName = e.target.innerText.replace(/[0-9]/g, '');
-		currentFilter
-			? dispatch(setCategory(''))
-			: dispatch(setCategory(buttonName));
-	};
-
-	const handleActionClick = (e) => {
-		const buttonName = e.target.innerText;
-
-		if (buttonName === 'Allow all') {
-			dispatch(setCurrentPreset('none'));
-			dispatch(toggleDisabledItems(false));
-		}
-		if (buttonName === 'Block all') {
-			dispatch(setCurrentPreset('strong'));
-			dispatch(toggleDisabledItems(true));
-		}
-
-		dispatch(setStatusForAllItems(buttonName));
-	};
+	const handleBlockAll = () => dispatch(toggleAllToBlock());
+	const handleAllowAll = () => dispatch(toggleAllToAllow());
+	const handleToggleFilter = (name) => {
+		currentFilter === name ? dispatch(setCategory('')) : dispatch(setCategory(name));
+	} 
 
 	return (
 		<div className='action-selection'>
@@ -73,7 +39,7 @@ export const ActionSelection = () => {
 				<span>Filter Categories</span>
 				<div className='action-selection__categories-panel__items'>
 					<Button
-						clickHandler={handleCategoryChange}
+						onClick={() => handleToggleFilter("Allowed")}
 						className={`action-selection__categories-panel__item ${
 							currentFilter === 'Allowed'
 								? 'action-selection__categories-panel__item_selected'
@@ -84,36 +50,38 @@ export const ActionSelection = () => {
 						Allowed
 					</Button>
 					<Button
-						clickHandler={handleCategoryChange}
+						onClick={() => handleToggleFilter("Blocked")}
 						className={`action-selection__categories-panel__item ${
 							currentFilter === 'Blocked'
 								? 'action-selection__categories-panel__item_selected'
 								: ''
 						}`}
 					>
-						<span>{disabledItemsLength}</span>
+						<span>{blockedItemsLength}</span>
 						Blocked
 					</Button>
 				</div>
 			</div>
 			<div className='action-selection__actions'>
 				<Button
-					clickHandler={handleActionClick}
+					onClick={handleBlockAll}
 					className={`action-selection__action ${
-						isDisableBtn === 'Block all' || isCurrentPreset === 'strong'
+						isAllowAllDisabled
 							? 'action-selection__action_disabled'
 							: ''
 					}`}
+					disabled={isAllowAllDisabled}
 				>
 					Block all
 				</Button>
 				<Button
-					clickHandler={handleActionClick}
+					onClick={handleAllowAll}
 					className={`action-selection__action ${
-						isDisableBtn === 'Allow all' || isCurrentPreset === 'none'
+						isBlockAllDisabled
 							? 'action-selection__action_disabled'
 							: ''
 					}`}
+					disabled={isBlockAllDisabled}
 				>
 					Allow all
 				</Button>

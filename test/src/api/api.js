@@ -91,4 +91,3 @@ export const items = [
 	},
 ];
 
-export const filterNames = ['none', 'low', 'strong', 'custom'];
