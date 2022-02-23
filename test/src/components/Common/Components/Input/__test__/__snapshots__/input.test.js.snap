@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input"s tests Sent nothing 1`] = `<input />`;
+
+exports[`Input"s tests Sent only type 1`] = `
+<input
+  type="text"
+/>
+`;
+
+exports[`Input"s tests Sent type and additional props 1`] = `
+<input
+  className="class-name"
+  required={true}
+  type="text"
+/>
+`;

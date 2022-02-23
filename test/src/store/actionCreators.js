@@ -10,6 +10,7 @@ import {
 	SET_CUSTOM,
 	TOGGLE_CHECKBOX_IN_CUSTOM,
 } from './actionTypes';
+
 import {
 	formatList,
 	toggleDisabledList,

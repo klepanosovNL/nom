@@ -3,6 +3,7 @@ export const filterByName = (array, name) => {
 		? array.filter((item) => {
 				const itemName = item.name.toLowerCase();
 				const filterName = name.toLowerCase();
+				console.log('array"s item ', itemName.startsWith(filterName));
 				return itemName.startsWith(filterName);
 		  })
 		: array;

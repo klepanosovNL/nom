@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item"s tests Sent all 1`] = `
+<div
+  className="items__item"
+>
+  <label
+    className="items__item__title"
+  >
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fa fa-light fa-ban"
+    />
+    name1
+  </label>
+  <div
+    className="items__item__container"
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+    <div
+      className="items__item__description"
+    >
+      description
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Item"s tests Sent nothing 1`] = `
+<div
+  className="items__item"
+>
+  <label
+    className="items__item__title"
+  >
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fa fa-duotone fa-check"
+    />
+  </label>
+  <div
+    className="items__item__container"
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+    <div
+      className="items__item__description"
+    />
+  </div>
+</div>
+`;
+
+exports[`Item"s tests Sent only description 1`] = `
+<div
+  className="items__item"
+>
+  <label
+    className="items__item__title"
+  >
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fa fa-duotone fa-check"
+    />
+  </label>
+  <div
+    className="items__item__container"
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+    <div
+      className="items__item__description"
+    >
+      description
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Item"s tests Sent only isDisabled=false 1`] = `
+<div
+  className="items__item"
+>
+  <label
+    className="items__item__title"
+  >
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fa fa-duotone fa-check"
+    />
+  </label>
+  <div
+    className="items__item__container"
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+    <div
+      className="items__item__description"
+    />
+  </div>
+</div>
+`;
+
+exports[`Item"s tests Sent only isDisabled=true 1`] = `
+<div
+  className="items__item"
+>
+  <label
+    className="items__item__title"
+  >
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fa fa-light fa-ban"
+    />
+  </label>
+  <div
+    className="items__item__container"
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+    <div
+      className="items__item__description"
+    />
+  </div>
+</div>
+`;
+
+exports[`Item"s tests Sent only name 1`] = `
+<div
+  className="items__item"
+>
+  <label
+    className="items__item__title"
+  >
+    <input
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fa fa-duotone fa-check"
+    />
+    name1
+  </label>
+  <div
+    className="items__item__container"
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+    <div
+      className="items__item__description"
+    />
+  </div>
+</div>
+`;

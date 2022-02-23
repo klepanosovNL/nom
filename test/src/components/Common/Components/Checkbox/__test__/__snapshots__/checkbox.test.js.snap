@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox"s tests Sent nothing 1`] = `
+<input
+  type="checkbox"
+/>
+`;
+
+exports[`Checkbox"s tests Sent only onChange event 1`] = `
+<input
+  onChange={[Function]}
+  type="checkbox"
+/>
+`;

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button"s tests Sent all arguments 1`] = `
+<button
+  className="btn_default example"
+  onClick={[Function]}
+>
+  Hello
+</button>
+`;
+
+exports[`Button"s tests Sent nothing 1`] = `
+<button
+  className="btn_default "
+/>
+`;
+
+exports[`Button"s tests Sent only children 1`] = `
+<button
+  className="btn_default "
+>
+  Hello
+</button>
+`;
+
+exports[`Button"s tests Sent only className 1`] = `
+<button
+  className="btn_default example"
+/>
+`;
