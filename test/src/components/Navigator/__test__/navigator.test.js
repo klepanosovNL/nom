@@ -14,18 +14,22 @@ jest.mock('../../../store/actionCreators', () => ({
 }));
 
 describe('Navigator"s tests', () => {
-	const initialState = {
-		list: [],
-		currentPreset: 'none',
-		filterByCategories: '',
-		filterByNameInput: '',
-		blockedButton: '',
-		customs: [],
-	};
+	let store;
 
-	const store = mockStore(initialState);
+	beforeEach(() => {
+		const initialState = {
+			list: [],
+			currentPreset: 'none',
+			filterByCategories: '',
+			filterByNameInput: '',
+			blockedButton: '',
+			customs: [],
+		};
 
-	it('Check event: clickHandler(name)', async () => {
+		store = mockStore(initialState);
+	});
+
+	it('Check event: clickHandler(low)', async () => {
 		render(wrapProvider(<Navigator></Navigator>, store));
 
 		const label = screen.getByText(/low/i);
@@ -44,6 +48,46 @@ describe('Navigator"s tests', () => {
 				{
 					type: 'TEST_TYPE_TOGGLE_DISABLED',
 					args: ['Literature', 'Software', 'Dogs', 'Cartoons'],
+				},
+			]);
+		});
+	});
+
+	it('Check event: clickHandler(strong)', async () => {
+		render(wrapProvider(<Navigator></Navigator>, store));
+
+		const label = screen.getByText(/strong/i);
+		fireEvent.click(label);
+
+		await waitFor(() => {
+			expect(store.getActions()).toEqual([
+				{
+					type: 'TEST_TYPE',
+					args: ['strong'],
+				},
+				{
+					type: 'TEST_TYPE_TOGGLE',
+					args: [true],
+				},
+			]);
+		});
+	});
+
+	it('Check event: clickHandler(none)', async () => {
+		render(wrapProvider(<Navigator></Navigator>, store));
+
+		const label = screen.getByText(/none/i);
+		fireEvent.click(label);
+
+		await waitFor(() => {
+			expect(store.getActions()).toEqual([
+				{
+					type: 'TEST_TYPE',
+					args: ['none'],
+				},
+				{
+					type: 'TEST_TYPE_TOGGLE',
+					args: [false],
 				},
 			]);
 		});
