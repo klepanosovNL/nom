@@ -1,78 +1,78 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import * as reactRedux from 'react-redux';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Item } from '../Item';
 import { mockStore, wrapProvider } from '../../../utils/mockedStore';
-// import { checkBoxToggle } from '../../../store/actionCreators';
-import { toggleCheckboxStatus } from '../../../utils/utils';
 
 jest.mock('../../../store/actionCreators', () => ({
 	checkBoxToggle: (...args) => ({ type: 'TEST_TYPE', args }),
 }));
 
 describe('Item"s tests', () => {
-	beforeEach(() => {
-		useSelectorMock.mockClear();
-		useDispatchMock.mockClear();
-	});
+	const initialState = {
+		list: [
+			{
+				name: 'dog',
+				description: 'description',
+			},
+		],
+		currentPreset: 'none',
+		filterByCategories: '',
+		filterByNameInput: '',
+		blockedButton: '',
+		customs: [],
+	};
 
-	const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
-	const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
+	const store = mockStore(initialState);
 
 	it('Sent only name', () => {
-		const tree = renderer.create(<Item name='name1'></Item>).toJSON();
+		const tree = renderer
+			.create(wrapProvider(<Item name='name1'></Item>, store))
+			.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('Sent only description', () => {
 		const tree = renderer
-			.create(<Item description='description'></Item>)
+			.create(wrapProvider(<Item description='description'></Item>, store))
 			.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('Sent only isDisabled=true', () => {
-		const tree = renderer.create(<Item isDisabled='true'></Item>).toJSON();
+		const tree = renderer
+			.create(wrapProvider(<Item isDisabled='true'></Item>, store))
+			.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('Sent only isDisabled=false', () => {
-		const tree = renderer.create(<Item></Item>).toJSON();
+		const tree = renderer.create(wrapProvider(<Item></Item>, store)).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('Sent nothing', () => {
-		const tree = renderer.create(<Item></Item>).toJSON();
+		const tree = renderer.create(wrapProvider(<Item></Item>, store)).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('Sent all', () => {
 		const tree = renderer
 			.create(
-				<Item name='name1' description='description' isDisabled='true'></Item>
+				wrapProvider(
+					<Item
+						name='name1'
+						description='description'
+						isDisabled='true'
+					></Item>,
+					store
+				)
 			)
 			.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
 	it('Check event: handleInputChange(name)', async () => {
-		const initialState = {
-			list: [
-				{
-					name: 'dog',
-					description: 'description',
-				},
-			],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const store = mockStore(initialState);
-
 		render(
 			wrapProvider(<Item name='dog' description='description'></Item>, store)
 		);
@@ -84,7 +84,7 @@ describe('Item"s tests', () => {
 			expect(store.getActions()).toEqual([
 				{
 					type: 'TEST_TYPE',
-					args: [],
+					args: ['dog'],
 				},
 			]);
 		});

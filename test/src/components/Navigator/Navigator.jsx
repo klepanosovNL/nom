@@ -49,7 +49,7 @@ export const Navigator = () => {
 						className={`presets__item ${
 							currentPreset === element ? 'presets__item_selected' : ''
 						}`}
-						clickHandler={() => clickHandler(element)}
+						onClick={() => clickHandler(element)}
 						key={element}
 					>
 						{element}

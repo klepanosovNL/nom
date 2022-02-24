@@ -1,4 +1,4 @@
-export const SET_LIST = 'GET_LIST';
+export const SET_LIST = 'SET_LIST';
 export const CHECK_CURRENT_PRESETS = 'CHECK_CURRENT_PRESETS';
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const SET_FILTER_BY_NAME = 'SET_FILTER_BY_NAME';

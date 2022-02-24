@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigator"s tests Navigator"s snapshot 1`] = `
+<div
+  className="presets"
+>
+  <button
+    className="btn_default presets__item presets__item_selected"
+    onClick={[Function]}
+  >
+    none
+  </button>
+  <button
+    className="btn_default presets__item "
+    onClick={[Function]}
+  >
+    low
+  </button>
+  <button
+    className="btn_default presets__item "
+    onClick={[Function]}
+  >
+    strong
+  </button>
+  <button
+    className="btn_default presets__item "
+    onClick={[Function]}
+  >
+    custom
+  </button>
+</div>
+`;

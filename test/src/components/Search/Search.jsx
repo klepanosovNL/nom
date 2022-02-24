@@ -13,8 +13,6 @@ export const Search = () => {
 		dispatch(setFilterByName(e.target.value));
 	};
 
-	const handleInputFocus = () => {};
-
 	return (
 		<div className='search'>
 			<i className='fa fa-search'></i>
@@ -22,7 +20,6 @@ export const Search = () => {
 				value={filter}
 				placeholder='Filter by name'
 				onChange={handleInputChange}
-				onFocus={handleInputFocus}
 			/>
 		</div>
 	);

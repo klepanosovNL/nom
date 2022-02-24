@@ -9,7 +9,6 @@ exports[`Search"s tests Search"s snapshot 1`] = `
   />
   <input
     onChange={[Function]}
-    onFocus={[Function]}
     placeholder="Filter by name"
   />
 </div>

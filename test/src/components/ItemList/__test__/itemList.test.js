@@ -1,19 +1,33 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import * as reactRedux from 'react-redux';
 import { ItemList } from '../ItemList';
+import { mockStore, wrapProvider } from '../../../utils/mockedStore';
+import { render, waitFor } from '@testing-library/react';
 
+jest.mock('../../../store/actionCreators', () => ({
+	setList: () => [],
+}));
 describe('ItemList"s tests', () => {
-	beforeEach(() => {
-		useSelectorMock.mockClear();
-		useDispatchMock.mockClear();
-	});
+	const initialState = {
+		list: [
+			{
+				name: 'dog',
+				description: 'description',
+			},
+		],
+		currentPreset: 'none',
+		filterByCategories: '',
+		filterByNameInput: '',
+		blockedButton: '',
+		customs: [],
+	};
 
-	const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
-	const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch');
+	it('ItemList"s', async () => {
+		const store = mockStore(initialState);
 
-	it('ItemList"s snapshot: is blocked', () => {
-		const tree = renderer.create(<ItemList></ItemList>).toJSON();
-		expect(tree).toMatchSnapshot();
+		render(wrapProvider(<ItemList></ItemList>, store));
+
+		await waitFor(() => {
+			expect(store.getActions()).toEqual([]);
+		});
 	});
 });
