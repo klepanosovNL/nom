@@ -1,7 +1,7 @@
 import React from 'react';
 import { ItemList } from '../ItemList';
 import { mockStore, wrapProvider } from '../../../utils/mockedStore';
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 jest.mock('../../../store/actionCreators', () => ({
 	setList: () => [],
@@ -21,13 +21,11 @@ describe('ItemList"s tests', () => {
 		customs: [],
 	};
 
-	it('ItemList"s', async () => {
+	it('ItemList"s', () => {
 		const store = mockStore(initialState);
 
 		render(wrapProvider(<ItemList></ItemList>, store));
 
-		await waitFor(() => {
-			expect(store.getActions()).toEqual([]);
-		});
+		expect(store.getActions()).toEqual([]);
 	});
 });

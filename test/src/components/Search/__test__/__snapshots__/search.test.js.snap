@@ -10,6 +10,7 @@ exports[`Search"s tests Search"s snapshot 1`] = `
   <input
     onChange={[Function]}
     placeholder="Filter by name"
+    value=""
   />
 </div>
 `;

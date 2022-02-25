@@ -1,9 +1,6 @@
 import React from 'react';
-import { cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { Input } from '../Input';
-
-afterEach(cleanup);
 
 describe('Input"s tests', () => {
 	it('Sent only type', () => {

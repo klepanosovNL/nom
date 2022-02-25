@@ -12,9 +12,13 @@ import {
 	TOGGLE_CHECKBOX_IN_CUSTOM,
 } from '../actionTypes';
 import { reducer } from '../reducer';
+import { mockStore } from '../../utils/mockedStore';
 
 describe('Reducer"s test', () => {
-	const initialState = {
+	let initialState;
+	let store;
+
+	const expected = {
 		list: [],
 		currentPreset: 'none',
 		filterByCategories: '',
@@ -23,275 +27,158 @@ describe('Reducer"s test', () => {
 		customs: [],
 	};
 
-	it('default', () => {
-		const action = {
-			type: 'test',
+	beforeEach(() => {
+		initialState = {
+			list: [],
+			currentPreset: 'none',
+			filterByCategories: '',
+			filterByNameInput: '',
+			blockedButton: '',
+			customs: [],
 		};
 
-		expect(reducer(initialState, action)).toEqual(initialState);
+		store = mockStore(initialState);
 	});
 
 	it('SET_LIST action', () => {
-		const expected = {
-			list: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: SET_LIST,
-			payload: expected,
-		};
+			payload: {
+				list: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('TOGGLE_CHECKBOX action', () => {
-		const expected = {
-			list: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: TOGGLE_CHECKBOX,
-			payload: expected,
-		};
+			payload: {
+				list: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('SET_CATEGORY_STATUS action', () => {
-		const expected = {
-			list: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: SET_CATEGORY_STATUS,
-			payload: expected,
-		};
+			payload: {
+				list: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('TOGGLE_DISABLED_ITEMS action', () => {
-		const expected = {
-			list: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: TOGGLE_DISABLED_ITEMS,
-			payload: expected,
-		};
+			payload: {
+				list: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('TOGGLE_DISABLED_ITEMS_BY_NAME action', () => {
-		const expected = {
-			list: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: TOGGLE_DISABLED_ITEMS_BY_NAME,
-			payload: expected,
-		};
+			payload: {
+				list: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
+	});
+
+	it('TOGGLE_CHECKBOX action', () => {
+		const newReducer = reducer(initialState, {
+			type: TOGGLE_CHECKBOX,
+			payload: {
+				list: [],
+			},
+		});
+
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('CHECK_CURRENT_PRESETS action', () => {
-		const expected = {
-			list: [],
-			currentPreset: 'low',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: CHECK_CURRENT_PRESETS,
-			payload: expected,
-		};
+			payload: {
+				currentPreset: 'none',
+				list: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
-	// it('SET_CATEGORY action', () => {
-	// 	const action = setCurrentPreset('test');
-	// 	const expected = {
-	// 		list: [],
-	// 		currentPreset: 'test',
-	// 		filterByCategories: '',
-	// 		filterByNameInput: '',
-	// 		blockedButton: '',
-	// 		customs: [],
-	// 	};
+	it('SET_CATEGORY action', () => {
+		const newReducer = reducer(initialState, {
+			type: SET_CATEGORY,
+			payload: {
+				currentPreset: 'none',
+				filterByCategories: '',
+			},
+		});
 
-	// 	// const action = {
-	// 	// 	type: SET_CATEGORY,
-	// 	// 	payload: expected,
-	// 	// };
-	// 	const newReducer = reducer(initialState, action);
-	// 	expect(newReducer).toEqual(expected);
-	// 	//TODO
-	// 	//call action
-	// });
+		expect(newReducer).toEqual(expected);
+	});
 
 	it('SET_FILTER_BY_NAME action', () => {
-		const expected = {
-			list: [],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: SET_FILTER_BY_NAME,
-			payload: expected,
-		};
+			payload: {
+				filterByNameInput: '',
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('SET_STATUS_FOR_ALL_ITEMS action', () => {
-		const expected = {
-			list: [],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: 'Block all',
-			customs: [],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: SET_STATUS_FOR_ALL_ITEMS,
-			payload: expected,
-		};
+			payload: {
+				blockedButton: '',
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('TOGGLE_CHECKBOX_IN_CUSTOM action', () => {
-		const expected = {
-			list: [],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: TOGGLE_CHECKBOX_IN_CUSTOM,
-			payload: expected,
-		};
+			payload: {
+				customs: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
 	});
 
 	it('SET_CUSTOM action', () => {
-		const expected = {
-			list: [],
-			currentPreset: 'none',
-			filterByCategories: '',
-			filterByNameInput: '',
-			blockedButton: '',
-			customs: [
-				{
-					name: 'test name',
-					description: 'test description',
-				},
-				{
-					name: 'test name1',
-					description: 'test description1',
-				},
-			],
-		};
-
-		const action = {
+		const newReducer = reducer(initialState, {
 			type: SET_CUSTOM,
-			payload: expected,
-		};
+			payload: {
+				customs: [],
+			},
+		});
 
-		expect(reducer(initialState, action)).toEqual(expected);
+		expect(newReducer).toEqual(expected);
+	});
+
+	it('TEST action', () => {
+		const newReducer = reducer(initialState, {
+			type: 'TEST',
+		});
+
+		expect(newReducer).toEqual(expected);
 	});
 });
