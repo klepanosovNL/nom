@@ -1,44 +1,23 @@
 import { filterNames } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	setCurrentPreset,
-	toggleDisabledItems,
-	toggleDisabledItemsByName,
-} from '../../store/actionCreators';
+import // toggleDisabledItems,
+// toggleDisabledItemsByName,
+'../../store/list/actionCreators';
+import { useParams } from 'react-router-dom';
+import { setCurrentPreset } from '../../store/presets/actionCreators';
 import './navigator_module.scss';
 import { Button } from '../Common/Components/Button/Button';
 import _ from 'lodash';
 import { currentPresetSelector } from '../../store/selectors';
+import { setStatusForAllItems } from '../../store/disabledButton/actionCreators';
 export const Navigator = () => {
 	const dispatch = useDispatch();
 	const currentPreset = useSelector(currentPresetSelector);
+	const { id } = useParams();
 
 	const clickHandler = (name) => {
-		dispatch(setCurrentPreset(name));
-
-		switch (name) {
-			case 'low':
-				dispatch(toggleDisabledItems(false));
-				dispatch(
-					toggleDisabledItemsByName([
-						'Literature',
-						'Software',
-						'Dogs',
-						'Cartoons',
-					])
-				);
-				break;
-
-			case 'strong':
-				dispatch(toggleDisabledItems(true));
-				break;
-			case 'none':
-				dispatch(toggleDisabledItems(false));
-				break;
-
-			default:
-				break;
-		}
+		dispatch(setCurrentPreset(name, id));
+		dispatch(setStatusForAllItems(''));
 	};
 
 	return (

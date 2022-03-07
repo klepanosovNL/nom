@@ -11,7 +11,7 @@ import {
 	SET_CUSTOM,
 	TOGGLE_CHECKBOX_IN_CUSTOM,
 } from '../actionTypes';
-import { reducer } from '../reducer';
+import { reducer } from '../listReducer';
 import { mockStore } from '../../utils/mockedStore';
 
 describe('Reducer"s test', () => {

@@ -1,12 +1,9 @@
 import { Button } from '../Common/Components/Button/Button';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	setCategory,
-	setCurrentPreset,
-	setStatusForAllItems,
-	toggleDisabledItems,
-} from '../../store/actionCreators';
+import { setStatusForAllItems } from '../../store/disabledButton/actionCreators';
+import { setCategory } from '../../store/categories/actionCreators';
+import { setCurrentPreset } from '../../store/presets/actionCreators';
 import {
 	disableButtonSelector,
 	currentPresetSelector,
@@ -14,15 +11,18 @@ import {
 	customListSelector,
 	filterByCategoriesSelector,
 } from '../../store/selectors';
-
+import { useParams } from 'react-router-dom';
 import './action-selection_module.scss';
 
 export const ActionSelection = () => {
 	const dispatch = useDispatch();
+
+	const { id } = useParams();
+	const list = useSelector(allListSelector(id));
+
 	const isDisableBtn = useSelector(disableButtonSelector);
 	const isCurrentPreset = useSelector(currentPresetSelector);
-	const list = useSelector(allListSelector);
-	const customs = useSelector(customListSelector);
+	const customs = useSelector(customListSelector(id));
 	const currentFilter = useSelector(filterByCategoriesSelector);
 
 	let disabledItemsLength;
@@ -47,7 +47,7 @@ export const ActionSelection = () => {
 
 	const handleCategoryChange = (e) => {
 		const buttonName = e.target.innerText.replace(/[0-9]/g, '');
-		currentFilter
+		currentFilter === buttonName
 			? dispatch(setCategory(''))
 			: dispatch(setCategory(buttonName));
 	};
@@ -57,11 +57,9 @@ export const ActionSelection = () => {
 
 		if (buttonName === 'Allow all') {
 			dispatch(setCurrentPreset('none'));
-			dispatch(toggleDisabledItems(false));
 		}
 		if (buttonName === 'Block all') {
 			dispatch(setCurrentPreset('strong'));
-			dispatch(toggleDisabledItems(true));
 		}
 
 		dispatch(setStatusForAllItems(buttonName));
@@ -73,7 +71,7 @@ export const ActionSelection = () => {
 				<span>Filter Categories</span>
 				<div className='action-selection__categories-panel__items'>
 					<Button
-						clickHandler={handleCategoryChange}
+						onClick={handleCategoryChange}
 						className={`action-selection__categories-panel__item ${
 							currentFilter === 'Allowed'
 								? 'action-selection__categories-panel__item_selected'
@@ -84,7 +82,7 @@ export const ActionSelection = () => {
 						Allowed
 					</Button>
 					<Button
-						clickHandler={handleCategoryChange}
+						onClick={handleCategoryChange}
 						className={`action-selection__categories-panel__item ${
 							currentFilter === 'Blocked'
 								? 'action-selection__categories-panel__item_selected'
@@ -98,7 +96,7 @@ export const ActionSelection = () => {
 			</div>
 			<div className='action-selection__actions'>
 				<Button
-					clickHandler={handleActionClick}
+					onClick={handleActionClick}
 					className={`action-selection__action ${
 						isDisableBtn === 'Block all' || isCurrentPreset === 'strong'
 							? 'action-selection__action_disabled'
@@ -108,7 +106,7 @@ export const ActionSelection = () => {
 					Block all
 				</Button>
 				<Button
-					clickHandler={handleActionClick}
+					onClick={handleActionClick}
 					className={`action-selection__action ${
 						isDisableBtn === 'Allow all' || isCurrentPreset === 'none'
 							? 'action-selection__action_disabled'

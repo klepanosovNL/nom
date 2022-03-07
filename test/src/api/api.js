@@ -91,4 +91,17 @@ export const items = [
 	},
 ];
 
+export const switchers = [
+	{
+		label: 'Default Group',
+		description: 'For new unassigned devices',
+		id: 'defaultList',
+	},
+	{
+		label: 'Employees',
+		description: 'Trusted users',
+		id: 'employeesList',
+	},
+];
+
 export const filterNames = ['none', 'low', 'strong', 'custom'];

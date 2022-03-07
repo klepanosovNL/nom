@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilterByName } from '../../store/actionCreators';
+import { setFilterByName } from '../../store/search/actionCreators';
 import { Input } from '../Common/Components/Input/Input';
 import { filterByNameSelector } from '../../store/selectors';
 import './search_module.scss';

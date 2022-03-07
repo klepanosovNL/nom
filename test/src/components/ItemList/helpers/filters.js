@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const filterByName = (array, name) => {
 	return name
 		? array.filter((item) => {
@@ -15,6 +17,33 @@ export const filterByCategory = (array, category) => {
 
 		case 'blocked':
 			return array.filter((element) => element.isDisabled);
+
+		default:
+			return array;
+	}
+};
+
+export const filterByPreset = (array, currentPreset, exception = []) => {
+	switch (currentPreset) {
+		case 'low':
+			return _.map(array, (element) => {
+				return {
+					...element,
+					isDisabled: _.includes(exception, element.name),
+				};
+			});
+
+		case 'none':
+			return _.map(array, (element) => ({
+				...element,
+				isDisabled: false,
+			}));
+
+		case 'strong':
+			return _.map(array, (element) => ({
+				...element,
+				isDisabled: true,
+			}));
 
 		default:
 			return array;

@@ -1,13 +1,15 @@
 import { useDispatch } from 'react-redux';
-import { checkBoxToggle } from '../../store/actionCreators';
+import { checkBoxToggle } from '../../store/list/actionCreators';
 import { Checkbox } from '../Common/Components/Checkbox/Checkbox';
+import { useParams } from 'react-router-dom';
 import './item_module.scss';
 
 export const Item = ({ name, description, isDisabled }) => {
 	const dispatch = useDispatch();
+	const { id } = useParams();
 
 	const handleInputChange = (name) => {
-		dispatch(checkBoxToggle(name));
+		dispatch(checkBoxToggle(name, id));
 	};
 
 	return (

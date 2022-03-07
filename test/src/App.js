@@ -1,29 +1,30 @@
 import { useEffect } from 'react';
-import { setList } from './store/actionCreators';
-import { useDispatch } from 'react-redux';
-
-import { Navigator } from './components/Navigator/Navigator';
-import { Search } from './components/Search/Search';
-import { ItemList } from './components/ItemList/ItemList';
-import { ActionSelection } from './components/ActionSelection/ActionSelection';
+import { loadList, loadSwitchers } from './store/list/actionCreators';
+import { useDispatch, useSelector } from 'react-redux';
+import { InfoTable } from './components/InfoTable/InfoTable';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import _ from 'lodash';
+import { getSwitchers } from './store/selectors';
 import './App.css';
 
 function App() {
 	const dispatch = useDispatch();
+	const switchers = useSelector(getSwitchers).keys;
 
 	useEffect(() => {
-		dispatch(setList());
+		dispatch(loadSwitchers());
+		dispatch(loadList());
 	}, [dispatch]);
 
+	if (_.isEmpty(switchers)) return null;
+
+	const defaultSwitcher = switchers[0];
+
 	return (
-		<div className='wrapper'>
-			<div className='header'>
-				<Navigator />
-				<Search />
-			</div>
-			<ItemList />
-			<ActionSelection />
-		</div>
+		<Routes>
+			<Route path='/group/:id' element={<InfoTable />} />
+			<Route path='*' element={<Navigate to={`/group/${defaultSwitcher}`} />} />
+		</Routes>
 	);
 }
 
