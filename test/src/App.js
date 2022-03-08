@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { loadList, loadSwitchers } from './store/list/actionCreators';
+import { loadList, loadSwitchers } from './store/list/listActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { InfoTable } from './components/InfoTable/InfoTable';
 import { Routes, Route, Navigate } from 'react-router-dom';

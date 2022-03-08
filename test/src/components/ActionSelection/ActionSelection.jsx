@@ -1,9 +1,9 @@
 import { Button } from '../Common/Components/Button/Button';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setStatusForAllItems } from '../../store/disabledButton/actionCreators';
-import { setCategory } from '../../store/categories/actionCreators';
-import { setCurrentPreset } from '../../store/presets/actionCreators';
+import { setStatusForAllItems } from '../../store/disabledButton/disabledButtonActionCreators';
+import { setCategory } from '../../store/categories/categoriesActionCreators';
+import { setCurrentPreset } from '../../store/presets/presetsActionCreators';
 import {
 	disableButtonSelector,
 	currentPresetSelector,

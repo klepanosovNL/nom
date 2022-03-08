@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { checkBoxToggle } from '../../store/list/actionCreators';
+import { checkBoxToggle } from '../../store/list/listActionCreators';
 import { Checkbox } from '../Common/Components/Checkbox/Checkbox';
 import { useParams } from 'react-router-dom';
 import './item_module.scss';

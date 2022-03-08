@@ -2,14 +2,14 @@ import { filterNames } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import // toggleDisabledItems,
 // toggleDisabledItemsByName,
-'../../store/list/actionCreators';
+'../../store/list/listActionCreators';
 import { useParams } from 'react-router-dom';
-import { setCurrentPreset } from '../../store/presets/actionCreators';
+import { setCurrentPreset } from '../../store/presets/presetsActionCreators';
 import './navigator_module.scss';
 import { Button } from '../Common/Components/Button/Button';
 import _ from 'lodash';
 import { currentPresetSelector } from '../../store/selectors';
-import { setStatusForAllItems } from '../../store/disabledButton/actionCreators';
+import { setStatusForAllItems } from '../../store/disabledButton/disabledButtonActionCreators';
 export const Navigator = () => {
 	const dispatch = useDispatch();
 	const currentPreset = useSelector(currentPresetSelector);

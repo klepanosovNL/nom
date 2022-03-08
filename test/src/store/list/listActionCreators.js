@@ -7,8 +7,8 @@ import {
 } from '../actionTypes';
 import _ from 'lodash';
 
-import { setCurrentPreset } from '../presets/actionCreators';
-import { setStatusForAllItems } from '../disabledButton/actionCreators';
+import { setCurrentPreset } from '../presets/presetsActionCreators';
+import { setStatusForAllItems } from '../disabledButton/disabledButtonActionCreators';
 
 import { formatList, toggleCheckboxStatus } from '../../utils/utils';
 
