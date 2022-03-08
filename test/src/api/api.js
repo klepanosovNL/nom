@@ -104,4 +104,6 @@ export const switchers = [
 	},
 ];
 
-export const filterNames = ['none', 'low', 'strong', 'custom'];
+export const low = ['Literature', 'Software', 'Dogs', 'Cartoons'];
+
+export const protections = ['none', 'low', 'strong', 'custom'];

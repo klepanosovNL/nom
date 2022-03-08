@@ -1,4 +1,4 @@
-import { CHECK_CURRENT_PRESETS } from '../actionTypes';
+import { CHANGE_PROTECTION } from '../actionTypes';
 
 const initialState = {
 	currentPreset: 'none',
@@ -6,7 +6,7 @@ const initialState = {
 
 export const presetsReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case CHECK_CURRENT_PRESETS:
+		case CHANGE_PROTECTION:
 			return {
 				...state,
 				currentPreset: action.payload.currentPreset,

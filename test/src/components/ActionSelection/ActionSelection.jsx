@@ -3,7 +3,7 @@ import { Button } from '../Common/Components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStatusForAllItems } from '../../store/disabledButton/disabledButtonActionCreators';
 import { setCategory } from '../../store/categories/categoriesActionCreators';
-import { setCurrentPreset } from '../../store/presets/presetsActionCreators';
+import { changeProtection } from '../../store/presets/presetsActionCreators';
 import {
 	disableButtonSelector,
 	currentPresetSelector,
@@ -56,10 +56,10 @@ export const ActionSelection = () => {
 		const buttonName = e.target.innerText;
 
 		if (buttonName === 'Allow all') {
-			dispatch(setCurrentPreset('none'));
+			dispatch(changeProtection('none'));
 		}
 		if (buttonName === 'Block all') {
-			dispatch(setCurrentPreset('strong'));
+			dispatch(changeProtection('strong'));
 		}
 
 		dispatch(setStatusForAllItems(buttonName));

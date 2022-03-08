@@ -2,6 +2,7 @@ import './item-list_module.scss';
 import { useSelector } from 'react-redux';
 import { Item } from '../Item/Item';
 import _ from 'lodash';
+import { low } from '../../api/api';
 import {
 	filterByName,
 	filterByCategory,
@@ -24,20 +25,19 @@ export const ItemList = () => {
 	const customs = useSelector(customListSelector(id));
 	const currentCategory = useSelector(filterByCategoriesSelector);
 	const renderList = currentPreset === 'custom' ? customs : list;
-	const EXCEPTIONS = ['Literature', 'Software', 'Dogs', 'Cartoons'];
-
+	console.log(list);
 	return (
 		<div className='items'>
 			<div className='items__container'>
 				{_.map(
-					filterByPreset(
-						filterByName(
-							filterByCategory(renderList, currentCategory),
-							filterName
-						),
-						currentPreset,
-						EXCEPTIONS
+					// filterByPreset(
+					filterByName(
+						filterByCategory(renderList, currentCategory),
+						filterName
 					),
+					// currentPreset,
+					// low
+					// ),
 					({ name, description, isDisabled }) => (
 						<Item
 							key={name}

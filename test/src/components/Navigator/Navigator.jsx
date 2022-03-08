@@ -1,10 +1,10 @@
-import { filterNames } from '../../api/api';
+import { protections } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import // toggleDisabledItems,
 // toggleDisabledItemsByName,
 '../../store/list/listActionCreators';
 import { useParams } from 'react-router-dom';
-import { setCurrentPreset } from '../../store/presets/presetsActionCreators';
+import { changeProtection } from '../../store/presets/presetsActionCreators';
 import './navigator_module.scss';
 import { Button } from '../Common/Components/Button/Button';
 import _ from 'lodash';
@@ -15,14 +15,14 @@ export const Navigator = () => {
 	const currentPreset = useSelector(currentPresetSelector);
 	const { id } = useParams();
 
-	const clickHandler = (name) => {
-		dispatch(setCurrentPreset(name, id));
+	const clickHandler = (protection) => {
+		dispatch(changeProtection(protection, id));
 		dispatch(setStatusForAllItems(''));
 	};
 
 	return (
 		<div className='presets'>
-			{_.map(filterNames, (element) => {
+			{_.map(protections, (element) => {
 				return (
 					<Button
 						className={`presets__item ${

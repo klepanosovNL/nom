@@ -1,10 +1,17 @@
-import { CHECK_CURRENT_PRESETS } from '../actionTypes';
+import { CHANGE_PROTECTION } from '../actionTypes';
+import { filterByPreset } from '../../components/ItemList/helpers/filters';
+import { low } from '../../api/api';
 
-export const setCurrentPreset = (currentPreset) => {
-	return {
-		type: CHECK_CURRENT_PRESETS,
-		payload: {
-			currentPreset,
-		},
+export const changeProtection =
+	(currentPreset, currentSwitcher) => (dispatch, getState) => {
+		const list = getState().listReducer[currentSwitcher];
+
+		dispatch({
+			type: CHANGE_PROTECTION,
+			payload: {
+				currentPreset,
+				[currentSwitcher]: filterByPreset(list, currentPreset, low),
+				currentSwitcher,
+			},
+		});
 	};
-};

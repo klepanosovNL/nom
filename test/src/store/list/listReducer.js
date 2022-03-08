@@ -4,6 +4,8 @@ import {
 	SET_CUSTOM,
 	TOGGLE_CHECKBOX_IN_CUSTOM,
 	LOAD_SWITCHERS,
+	CHANGE_PROTECTION,
+	// CHECK_CURRENT_PRESETS,
 } from '../actionTypes';
 
 const initialState = {
@@ -24,6 +26,13 @@ export const listReducer = (state = initialState, action) => {
 			};
 
 		case TOGGLE_CHECKBOX:
+			return {
+				...state,
+				[action.payload.currentSwitcher]:
+					action.payload[action.payload.currentSwitcher],
+			};
+
+		case CHANGE_PROTECTION:
 			return {
 				...state,
 				[action.payload.currentSwitcher]:
