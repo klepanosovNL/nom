@@ -1,5 +1,5 @@
 import { CHANGE_PROTECTION } from '../action.types';
-import { filterByPreset } from '../../components/ItemList/helpers/filters';
+import { filterByPreset } from '../../utils/utils';
 import { low } from '../../api/api';
 
 export const changeProtection =

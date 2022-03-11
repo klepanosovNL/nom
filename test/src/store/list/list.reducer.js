@@ -3,6 +3,7 @@ import {
 	TOGGLE_CHECKBOX,
 	LOAD_SWITCHERS,
 	CHANGE_PROTECTION,
+	SET_CUSTOM_LIST,
 } from '../action.types';
 
 const initialState = {
@@ -22,6 +23,12 @@ export const listReducer = (state = initialState, action) => {
 				defaultList: action.payload.list,
 				defaultListCustom: action.payload.list,
 				employeesListCustom: action.payload.list,
+			};
+
+		case SET_CUSTOM_LIST:
+			return {
+				...state,
+				[action.payload.listName]: action.payload.list,
 			};
 
 		case TOGGLE_CHECKBOX:

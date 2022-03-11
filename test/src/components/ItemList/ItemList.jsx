@@ -2,7 +2,7 @@ import './item-list_module.scss';
 import { useSelector } from 'react-redux';
 import { Item } from '../Item/Item';
 import _ from 'lodash';
-import { filterByName, filterByCategory } from './helpers/filters';
+import { filterByName, filterByCategory } from '../../utils/utils';
 import { useParams } from 'react-router-dom';
 import {
 	allListSelector,
