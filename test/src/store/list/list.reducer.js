@@ -25,13 +25,8 @@ export const listReducer = (state = initialState, action) => {
 				employeesListCustom: action.payload.list,
 			};
 
-		case SET_CUSTOM_LIST:
-			return {
-				...state,
-				[action.payload.listName]: action.payload.list,
-			};
-
 		case TOGGLE_CHECKBOX:
+		case SET_CUSTOM_LIST:
 			return {
 				...state,
 				[action.payload.listName]: action.payload.list,
