@@ -9,7 +9,6 @@ export const toggleCheckboxStatus = (list, name) => {
 			return {
 				...element,
 				isDisabled: !element.isDisabled,
-				isCustom: true,
 			};
 		}
 

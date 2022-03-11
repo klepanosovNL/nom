@@ -1,4 +1,4 @@
-import { SET_CATEGORY } from '../actionTypes';
+import { SET_CATEGORY } from '../action.types';
 
 export const setCategory = (category) => {
 	return {

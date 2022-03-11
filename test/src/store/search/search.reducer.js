@@ -1,4 +1,4 @@
-import { SET_FILTER_BY_NAME } from '../actionTypes';
+import { SET_FILTER_BY_NAME } from '../action.types';
 
 const initialState = {
 	filterByNameInput: '',

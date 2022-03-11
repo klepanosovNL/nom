@@ -1,4 +1,4 @@
-import { CHANGE_PROTECTION } from '../actionTypes';
+import { CHANGE_PROTECTION } from '../action.types';
 import { filterByPreset } from '../../components/ItemList/helpers/filters';
 import { low } from '../../api/api';
 

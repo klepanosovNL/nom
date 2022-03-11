@@ -1,12 +1,9 @@
 import {
 	LOAD_LIST,
 	TOGGLE_CHECKBOX,
-	SET_CUSTOM,
-	TOGGLE_CHECKBOX_IN_CUSTOM,
 	LOAD_SWITCHERS,
 	CHANGE_PROTECTION,
-	// CHECK_CURRENT_PRESETS,
-} from '../actionTypes';
+} from '../action.types';
 
 const initialState = {
 	defaultList: [],
@@ -23,13 +20,14 @@ export const listReducer = (state = initialState, action) => {
 				...state,
 				employeesList: action.payload.list,
 				defaultList: action.payload.list,
+				defaultListCustom: action.payload.list,
+				employeesListCustom: action.payload.list,
 			};
 
 		case TOGGLE_CHECKBOX:
 			return {
 				...state,
-				[action.payload.currentSwitcher]:
-					action.payload[action.payload.currentSwitcher],
+				[action.payload.listName]: action.payload.list,
 			};
 
 		case CHANGE_PROTECTION:
@@ -38,22 +36,6 @@ export const listReducer = (state = initialState, action) => {
 				[action.payload.currentSwitcher]:
 					action.payload[action.payload.currentSwitcher],
 			};
-
-		case TOGGLE_CHECKBOX_IN_CUSTOM: {
-			return {
-				...state,
-				[action.payload.currentCustom]:
-					action.payload[action.payload.currentCustom],
-			};
-		}
-
-		case SET_CUSTOM: {
-			return {
-				...state,
-				[action.payload.currentCustom]:
-					action.payload[action.payload.currentCustom],
-			};
-		}
 
 		case LOAD_SWITCHERS: {
 			return {

@@ -1,11 +1,8 @@
 import { Button } from '../Common/Components/Button/Button';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { setStatusForAllItems } from '../../store/disabledButton/disabledButtonActionCreators';
-import { setCategory } from '../../store/categories/categoriesActionCreators';
-import { changeProtection } from '../../store/presets/presetsActionCreators';
+import { setCategory } from '../../store/categories/categories.actions';
+import { changeProtection } from '../../store/presets/presets.actions';
 import {
-	disableButtonSelector,
 	currentPresetSelector,
 	allListSelector,
 	customListSelector,
@@ -16,34 +13,27 @@ import './action-selection_module.scss';
 
 export const ActionSelection = () => {
 	const dispatch = useDispatch();
-
 	const { id } = useParams();
-	const list = useSelector(allListSelector(id));
-
-	const isDisableBtn = useSelector(disableButtonSelector);
 	const isCurrentPreset = useSelector(currentPresetSelector);
-	const customs = useSelector(customListSelector(id));
+	let getUserList;
 	const currentFilter = useSelector(filterByCategoriesSelector);
+
+	isCurrentPreset === 'custom'
+		? (getUserList = customListSelector)
+		: (getUserList = allListSelector);
+
+	const renderList = useSelector(getUserList(id));
 
 	let disabledItemsLength;
 	let allowedItemsLength;
 
-	if (isCurrentPreset === 'custom') {
-		disabledItemsLength = customs.reduce(
-			(previousValue, currentValue) =>
-				currentValue.isDisabled ? previousValue + 1 : previousValue,
-			0
-		);
-		allowedItemsLength = customs.length - disabledItemsLength;
-	} else {
-		disabledItemsLength = list.reduce(
-			(previousValue, currentValue) =>
-				currentValue.isDisabled ? previousValue + 1 : previousValue,
-			0
-		);
+	disabledItemsLength = renderList.reduce(
+		(previousValue, currentValue) =>
+			currentValue.isDisabled ? previousValue + 1 : previousValue,
+		0
+	);
 
-		allowedItemsLength = list.length - disabledItemsLength;
-	}
+	allowedItemsLength = renderList.length - disabledItemsLength;
 
 	const handleCategoryChange = (e) => {
 		const buttonName = e.target.innerText.replace(/[0-9]/g, '');
@@ -55,14 +45,9 @@ export const ActionSelection = () => {
 	const handleActionClick = (e) => {
 		const buttonName = e.target.innerText;
 
-		if (buttonName === 'Allow all') {
-			dispatch(changeProtection('none'));
-		}
-		if (buttonName === 'Block all') {
-			dispatch(changeProtection('strong'));
-		}
-
-		dispatch(setStatusForAllItems(buttonName));
+		buttonName === 'Allow all'
+			? dispatch(changeProtection('none', id))
+			: dispatch(changeProtection('strong', id));
 	};
 
 	return (
@@ -98,7 +83,7 @@ export const ActionSelection = () => {
 				<Button
 					onClick={handleActionClick}
 					className={`action-selection__action ${
-						isDisableBtn === 'Block all' || isCurrentPreset === 'strong'
+						renderList.length === disabledItemsLength
 							? 'action-selection__action_disabled'
 							: ''
 					}`}
@@ -108,7 +93,7 @@ export const ActionSelection = () => {
 				<Button
 					onClick={handleActionClick}
 					className={`action-selection__action ${
-						isDisableBtn === 'Allow all' || isCurrentPreset === 'none'
+						renderList.length === allowedItemsLength
 							? 'action-selection__action_disabled'
 							: ''
 					}`}

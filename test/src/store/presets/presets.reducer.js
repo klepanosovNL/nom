@@ -1,4 +1,4 @@
-import { CHANGE_PROTECTION } from '../actionTypes';
+import { CHANGE_PROTECTION } from '../action.types';
 
 const initialState = {
 	currentPreset: 'none',
